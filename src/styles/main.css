@@ -1,4 +1,11 @@
 /* Common icon styles */
+.item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
 .item-icon i {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7), -1px -1px 1px rgba(0, 0, 0, 0.7), 1px -1px 1px rgba(0, 0, 0, 0.7), -1px 1px 1px rgba(0, 0, 0, 0.7);
 }
@@ -623,6 +630,9 @@ main {
     margin-right: 15px;
     color: white;
     font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .gathering-result-item .item-icon {
@@ -633,13 +643,43 @@ main {
     margin-right: 15px;
     color: white;
     font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .loot-materials-list .item-icon,
 .loot-coinage-list .item-icon {
-    width: 30px;
-    text-align: center;
-    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    margin-right: 15px;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loot-coinage-list .item-icon[data-coin="cp"] {
+    background-color: #B87333; /* Copper */
+}
+
+.loot-coinage-list .item-icon[data-coin="sp"] {
+    background-color: #C0C0C0; /* Silver */
+}
+
+.loot-coinage-list .item-icon[data-coin="gp"] {
+    background-color: #FFD700; /* Gold */
+}
+
+.loot-coinage-list .item-icon[data-coin="pp"] {
+    background-color: #E5E4E2; /* Platinum */
+}
+
+.loot-coinage-list .item-icon[data-coin="pp"] i {
+    color: #333; /* Darker text for platinum to improve contrast */
 }
 
 /* Coming Soon Styles */
@@ -877,13 +917,10 @@ footer {
     font-size: 18px;
 }
 
-.gathering-result-item .item-icon i {
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7), -1px -1px 1px rgba(0, 0, 0, 0.7), 1px -1px 1px rgba(0, 0, 0, 0.7), -1px 1px 1px rgba(0, 0, 0, 0.7);
-}
-
 .item-details {
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
 .item-name {
@@ -976,27 +1013,29 @@ footer {
 .loot-coinage-list li {
     display: flex;
     align-items: center;
-    padding: 8px 0;
+    padding: 12px;
     border-bottom: 1px solid #eee;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 8px;
 }
 
 .loot-materials-list li:last-child,
 .loot-coinage-list li:last-child {
-    border-bottom: none;
+    margin-bottom: 0;
 }
 
-.item-icon {
-    width: 30px;
-    text-align: center;
-    margin-right: 10px;
-    color: var(--accent-color);
+.loot-materials-list .item-name,
+.loot-coinage-list .item-name {
+    font-weight: bold;
+    font-size: 16px;
 }
 
-.item-icon i {
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7), -1px -1px 1px rgba(0, 0, 0, 0.7), 1px -1px 1px rgba(0, 0, 0, 0.7), -1px 1px 1px rgba(0, 0, 0, 0.7);
-}
-
-.item-quantity {
+.loot-materials-list .item-quantity,
+.loot-coinage-list .item-quantity {
+    color: #666;
+    font-size: 14px;
     font-weight: bold;
     margin-right: 10px;
     min-width: 30px;
@@ -1172,16 +1211,6 @@ footer {
     margin-bottom: 0;
     padding-bottom: 0;
     border-bottom: none;
-}
-
-.harvest-result-item .item-icon {
-    width: 40px;
-    height: 40px;
-    background-color: var(--accent-color);
-    border-radius: 50%;
-    margin-right: 15px;
-    color: white;
-    font-size: 18px;
 }
 
 .item-details {

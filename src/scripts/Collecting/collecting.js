@@ -971,16 +971,16 @@ const Collecting = {
             coinage.forEach(coin => {
                 let coinIcon = '';
                 switch (coin.type) {
-                    case 'cp': coinIcon = '<i class="fas fa-coins" style="color: #B87333;"></i>'; break; // Copper
-                    case 'sp': coinIcon = '<i class="fas fa-coins" style="color: #C0C0C0;"></i>'; break; // Silver
-                    case 'gp': coinIcon = '<i class="fas fa-coins" style="color: #FFD700;"></i>'; break; // Gold
-                    case 'pp': coinIcon = '<i class="fas fa-coins" style="color: #E5E4E2;"></i>'; break; // Platinum
+                    case 'cp': coinIcon = '<i class="fas fa-coins"></i>'; break; // Copper
+                    case 'sp': coinIcon = '<i class="fas fa-coins"></i>'; break; // Silver
+                    case 'gp': coinIcon = '<i class="fas fa-coins"></i>'; break; // Gold
+                    case 'pp': coinIcon = '<i class="fas fa-coins"></i>'; break; // Platinum
                     default: coinIcon = '<i class="fas fa-coins"></i>';
                 }
                 
                 resultHTML += `
                     <li>
-                        <span class="item-icon">${coinIcon}</span>
+                        <span class="item-icon" data-coin="${coin.type}">${coinIcon}</span>
                         <span class="item-quantity">${coin.quantity}</span>
                         <span class="item-name">${coin.type}</span>
                     </li>
