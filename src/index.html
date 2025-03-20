@@ -5,41 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D&D Crafting Tools</title>
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
         <h1>D&D Crafting Tools</h1>
-        <nav>
-            <ul>
-                <li><a href="#cheatsheets">Cheat Sheets</a></li>
-                <li><a href="#collecting">Collecting (Harvesting & Looting)</a></li>
-                <li><a href="#purchasing">Purchasing</a></li>
-            </ul>
+        <p class="subtitle">Based on "Crafting 1.0.6" mechanics</p>
+        
+        <!-- Top Navigation Bar -->
+        <nav class="top-nav">
+            <div class="nav-container">
+                <ul>
+                    <li><a href="#" class="nav-link" data-target="home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" class="nav-link" data-target="cheatsheets"><i class="fas fa-book"></i> Cheat Sheets</a></li>
+                    <li><a href="#" class="nav-link" data-target="collecting"><i class="fas fa-leaf"></i> Collecting</a></li>
+                    <li><a href="#" class="nav-link" data-target="purchasing"><i class="fas fa-coins"></i> Purchasing</a></li>
+                </ul>
+            </div>
         </nav>
     </header>
 
     <main>
-        <section id="cheatsheets">
-            <h2>Cheat Sheets</h2>
-            <p>Quick reference guides for crafting mechanics.</p>
-            <!-- Content will be loaded dynamically -->
+        <!-- Card Navigation -->
+        <section id="card-navigation" class="card-container">
+            <div class="card" data-target="cheatsheets">
+                <div class="card-icon"><i class="fas fa-book"></i></div>
+                <h2>Cheat Sheets</h2>
+                <p>Quick reference guides for crafting mechanics</p>
+            </div>
+            
+            <div class="card" data-target="collecting">
+                <div class="card-icon"><i class="fas fa-leaf"></i></div>
+                <h2>Collecting</h2>
+                <p>Tools for harvesting materials and looting</p>
+            </div>
+            
+            <div class="card" data-target="purchasing">
+                <div class="card-icon"><i class="fas fa-coins"></i></div>
+                <h2>Purchasing</h2>
+                <p>Shop price references for various items</p>
+            </div>
         </section>
 
-        <section id="collecting">
-            <h2>Collecting (Harvesting & Looting)</h2>
-            <p>Tools for harvesting materials and managing loot.</p>
-            <!-- Content will be loaded dynamically -->
-        </section>
+        <!-- Content Sections (initially hidden except for home) -->
+        <div id="content-sections">
+            <section id="home-content" class="content-section active">
+                <div class="section-header">
+                    <h2>Welcome to D&D Crafting Tools</h2>
+                </div>
+                <p>Select a card above or use the navigation bar to access different crafting tools and references.</p>
+                <div class="home-info">
+                    <p>This application provides tools to help Dungeon Masters and players understand and implement the crafting mechanics defined in "Crafting 1.0.6".</p>
+                </div>
+            </section>
 
-        <section id="purchasing">
-            <h2>Purchasing</h2>
-            <p>Shop price references for various items.</p>
-            <!-- Content will be loaded dynamically -->
-        </section>
+            <section id="cheatsheets-content" class="content-section">
+                <div class="section-header">
+                    <h2>Cheat Sheets</h2>
+                </div>
+                <p>Quick reference guides for crafting mechanics.</p>
+                <div class="cheatsheet-content">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </section>
+
+            <section id="collecting-content" class="content-section">
+                <div class="section-header">
+                    <h2>Collecting (Harvesting & Looting)</h2>
+                </div>
+                <p>Tools for harvesting materials and managing loot.</p>
+                <div class="collecting-content">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </section>
+
+            <section id="purchasing-content" class="content-section">
+                <div class="section-header">
+                    <h2>Purchasing</h2>
+                </div>
+                <p>Shop price references for various items.</p>
+                <div class="purchasing-content">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </section>
+        </div>
     </main>
 
     <footer>
-        <p>Based on the crafting mechanics defined in "Crafting 1.0.6"</p>
+        <p>&copy; 2025 D&D Crafting Tools</p>
     </footer>
 
     <!-- Main JavaScript -->
