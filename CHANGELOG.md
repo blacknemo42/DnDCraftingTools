@@ -12,6 +12,19 @@ All notable changes to the D&D Crafting Tools project will be documented in this
 ### Added
 - Added more detailed documentation for the Shop Tools features in README.md
 - Added CSS classes for Shop Tools while maintaining backward compatibility
+- Collecting Module
+  - Added basic structure for Collecting tools
+  - Implemented Harvest Generator tool with the following features:
+    - Basic harvesting for meat and hides based on creature size
+    - Exotic harvesting for special materials based on creature type and CR
+    - Support for different creature types (Beasts, Dragons, Monstrosities, etc.)
+    - Random roll generation for harvested items
+    - Quantity calculation for harvested materials
+  - Added placeholder for Gathering Calculator tool
+  - Added placeholder for Loot Generator tool
+  - Added placeholder for Remnant Finder tool
+- Added "Coming Soon" UI for all collecting tools
+- Added CSS styles for the collecting tools and coming soon sections
 
 ### Fixed
 - Fixed an issue with the Price Lookup tool where it was trying to access undefined properties

@@ -41,6 +41,10 @@ src/
   - Includes detailed markdown cheatsheets for all 11 crafting disciplines
   - Each cheatsheet contains crafting requirements, materials, DCs, and tips
 - **Collecting**: Tools for harvesting materials and managing loot
+  - Harvest Generator: Generate harvested materials from creatures based on type and CR
+  - Gathering Calculator: Calculate reagents, materials, and food gathered from different biomes
+  - Loot Generator: Generate loot from humanoid creatures based on CR
+  - Remnant Finder: Find magical remnants from creatures that don't leave corpses
 - **Shop Tools**: Shop price references and tools for various items
   - Price Lookup: Search for items by name, category, or rarity
   - Shop Generator: Generate random shop inventories (coming soon)
