@@ -73,12 +73,12 @@ function initNavigation() {
                 }
                 break;
                 
-            case 'purchasing':
-                // Initialize Purchasing module
-                if (typeof Purchasing !== 'undefined') {
-                    Purchasing.initialize();
+            case 'shoptools':
+                // Initialize ShopTools module
+                if (typeof ShopTools !== 'undefined') {
+                    ShopTools.initialize();
                 } else {
-                    console.error('Error loading Purchasing module');
+                    console.error('Error loading ShopTools module');
                 }
                 break;
         }

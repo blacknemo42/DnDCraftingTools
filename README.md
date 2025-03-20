@@ -15,8 +15,9 @@ src/
 │   │   └── cheatsheets.js
 │   ├── Collecting/     # Harvesting and looting tools
 │   │   └── collecting.js
-│   └── Purchasing/     # Shop price references
-│       └── purchasing.js
+│   └── ShopTools/      # Shop price references and tools
+│       ├── itemsData.js
+│       └── shopTools.js
 ├── images/             # Image assets
 └── docs/               # Documentation and reference materials
     ├── Crafting 1.0.6 - Free Version.pdf  # Original crafting guide
@@ -40,7 +41,10 @@ src/
   - Includes detailed markdown cheatsheets for all 11 crafting disciplines
   - Each cheatsheet contains crafting requirements, materials, DCs, and tips
 - **Collecting**: Tools for harvesting materials and managing loot
-- **Purchasing**: Shop price references for various items
+- **Shop Tools**: Shop price references and tools for various items
+  - Price Lookup: Search for items by name, category, or rarity
+  - Shop Generator: Generate random shop inventories (coming soon)
+  - Haggling Calculator: Calculate adjusted prices (coming soon)
 
 ## Getting Started
 

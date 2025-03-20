@@ -245,6 +245,29 @@ main {
     margin: 0;
 }
 
+/* Shop Tools Styles */
+.shop-tools-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+.shop-tool-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    display: flex;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    cursor: pointer;
+}
+
+.shop-tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
 /* Purchasing Tools Styles */
 .purchasing-tools-container {
     display: grid;
