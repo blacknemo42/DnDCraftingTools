@@ -20,7 +20,13 @@ All notable changes to the D&D Crafting Tools project will be documented in this
     - Support for different creature types (Beasts, Dragons, Monstrosities, etc.)
     - Random roll generation for harvested items
     - Quantity calculation for harvested materials
-  - Added placeholder for Gathering Calculator tool
+  - Implemented Gathering Calculator tool with the following features:
+    - Support for all biomes (Forest, Desert, Grasslands, etc.)
+    - Reagent gathering calculations
+    - Material search calculations
+    - Game hunting calculations
+    - Ability to simulate traveling vs dedicated gathering
+    - Ability check mechanics with proficiency bonus
   - Added placeholder for Loot Generator tool
   - Added placeholder for Remnant Finder tool
 - Added "Coming Soon" UI for all collecting tools
@@ -28,6 +34,7 @@ All notable changes to the D&D Crafting Tools project will be documented in this
 
 ### Fixed
 - Fixed an issue with the Price Lookup tool where it was trying to access undefined properties
+- Fixed styling issues with the back button
 
 ## [1.0.0] - 2025-03-20
 

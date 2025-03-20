@@ -514,23 +514,286 @@ const Collecting = {
     // Render the Gathering Calculator tool
     renderGatheringCalculator: function(container) {
         container.innerHTML = `
-            <div class="coming-soon-container">
-                <div class="coming-soon-icon">
-                    <i class="fas fa-tools"></i>
+            <div class="gathering-calculator-container">
+                <div class="gathering-form">
+                    <div class="form-group">
+                        <label for="biome-select">Biome:</label>
+                        <select id="biome-select" class="gathering-select">
+                            <option value="">Select Biome</option>
+                            ${GatheringData.biomes.map(biome => `<option value="${biome.id}">${biome.name}</option>`).join('')}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gathering-type">Gathering Type:</label>
+                        <select id="gathering-type" class="gathering-select">
+                            <option value="">Select Gathering Type</option>
+                            ${GatheringData.gatheringTypes.map(type => `<option value="${type.id}">${type.name}</option>`).join('')}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ability-modifier">Ability Modifier:</label>
+                        <select id="ability-modifier" class="gathering-select">
+                            <option value="-5">-5</option>
+                            <option value="-4">-4</option>
+                            <option value="-3">-3</option>
+                            <option value="-2">-2</option>
+                            <option value="-1">-1</option>
+                            <option value="0" selected>+0</option>
+                            <option value="1">+1</option>
+                            <option value="2">+2</option>
+                            <option value="3">+3</option>
+                            <option value="4">+4</option>
+                            <option value="5">+5</option>
+                            <option value="6">+6</option>
+                            <option value="7">+7</option>
+                            <option value="8">+8</option>
+                            <option value="9">+9</option>
+                            <option value="10">+10</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="proficiency-bonus">Proficiency Bonus:</label>
+                        <select id="proficiency-bonus" class="gathering-select">
+                            <option value="0" selected>+0 (Not Proficient)</option>
+                            <option value="2">+2 (Levels 1-4)</option>
+                            <option value="3">+3 (Levels 5-8)</option>
+                            <option value="4">+4 (Levels 9-12)</option>
+                            <option value="5">+5 (Levels 13-16)</option>
+                            <option value="6">+6 (Levels 17-20)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gathering-options">Gathering Options:</label>
+                        <div class="gathering-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="traveling-check">
+                                <span class="checkbox-label">Traveling (Disadvantage)</span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="dedicated-check">
+                                <span class="checkbox-label">Dedicated 8 hours (2 checks)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button id="calculate-gathering" class="primary-button">Calculate Gathering</button>
+                        <button id="reset-gathering" class="secondary-button">Reset</button>
+                    </div>
                 </div>
-                <h3>Gathering Calculator Coming Soon</h3>
-                <p>This tool will help you calculate what reagents, materials, and food can be gathered from different biomes.</p>
-                <div class="coming-soon-features">
-                    <h4>Planned Features:</h4>
-                    <ul>
-                        <li>Support for different biomes (Forest, Desert, Grasslands, etc.)</li>
-                        <li>Reagent gathering calculations</li>
-                        <li>Material search calculations</li>
-                        <li>Game hunting calculations</li>
-                    </ul>
+                
+                <div class="gathering-results">
+                    <h3>Gathering Results</h3>
+                    <div id="gathering-results-container">
+                        <p class="no-results">Select gathering details and click "Calculate Gathering" to see results.</p>
+                    </div>
                 </div>
             </div>
         `;
+        
+        // Add event listeners
+        this.setupGatheringCalculatorEvents(container);
+    },
+    
+    // Setup event listeners for the Gathering Calculator
+    setupGatheringCalculatorEvents: function(container) {
+        const calculateButton = container.querySelector('#calculate-gathering');
+        const resetButton = container.querySelector('#reset-gathering');
+        const biomeSelect = container.querySelector('#biome-select');
+        const gatheringTypeSelect = container.querySelector('#gathering-type');
+        const abilityModifierSelect = container.querySelector('#ability-modifier');
+        const proficiencyBonusSelect = container.querySelector('#proficiency-bonus');
+        const travelingCheck = container.querySelector('#traveling-check');
+        const dedicatedCheck = container.querySelector('#dedicated-check');
+        
+        // Calculate gathering when button is clicked
+        calculateButton.addEventListener('click', () => {
+            this.calculateGathering(container);
+        });
+        
+        // Reset form when reset button is clicked
+        resetButton.addEventListener('click', () => {
+            biomeSelect.value = '';
+            gatheringTypeSelect.value = '';
+            abilityModifierSelect.value = '0';
+            proficiencyBonusSelect.value = '0';
+            travelingCheck.checked = false;
+            dedicatedCheck.checked = false;
+            
+            const resultsContainer = container.querySelector('#gathering-results-container');
+            resultsContainer.innerHTML = '<p class="no-results">Select gathering details and click "Calculate Gathering" to see results.</p>';
+        });
+        
+        // Update description when gathering type changes
+        gatheringTypeSelect.addEventListener('change', () => {
+            const gatheringType = gatheringTypeSelect.value;
+            if (gatheringType) {
+                const typeData = GatheringData.gatheringTypes.find(type => type.id === gatheringType);
+                if (typeData) {
+                    const descriptionElement = container.querySelector('.gathering-type-description');
+                    if (descriptionElement) {
+                        descriptionElement.textContent = typeData.description;
+                    } else {
+                        const descriptionDiv = document.createElement('div');
+                        descriptionDiv.className = 'gathering-type-description';
+                        descriptionDiv.textContent = typeData.description;
+                        container.querySelector('.gathering-form').insertBefore(descriptionDiv, container.querySelector('.gathering-options').closest('.form-group'));
+                    }
+                }
+            } else {
+                const descriptionElement = container.querySelector('.gathering-type-description');
+                if (descriptionElement) {
+                    descriptionElement.remove();
+                }
+            }
+        });
+    },
+    
+    // Calculate gathering results
+    calculateGathering: function(container) {
+        const biome = container.querySelector('#biome-select').value;
+        const gatheringType = container.querySelector('#gathering-type').value;
+        const abilityModifier = parseInt(container.querySelector('#ability-modifier').value);
+        const proficiencyBonus = parseInt(container.querySelector('#proficiency-bonus').value);
+        const isTraveling = container.querySelector('#traveling-check').checked;
+        const isDedicated = container.querySelector('#dedicated-check').checked;
+        
+        const resultsContainer = container.querySelector('#gathering-results-container');
+        
+        // Validate inputs
+        if (!biome) {
+            resultsContainer.innerHTML = '<p class="error-message">Please select a biome.</p>';
+            return;
+        }
+        
+        if (!gatheringType) {
+            resultsContainer.innerHTML = '<p class="error-message">Please select a gathering type.</p>';
+            return;
+        }
+        
+        // Clear previous results
+        resultsContainer.innerHTML = '';
+        
+        // Get the appropriate table based on biome and gathering type
+        let table;
+        switch (gatheringType) {
+            case 'reagents':
+                table = GatheringData.reagentTables[biome];
+                break;
+            case 'materials':
+                table = GatheringData.materialTables[biome];
+                break;
+            case 'game':
+                table = GatheringData.gameTables[biome];
+                break;
+        }
+        
+        if (!table) {
+            resultsContainer.innerHTML = '<p class="error-message">No gathering data available for this biome and gathering type.</p>';
+            return;
+        }
+        
+        // Determine number of checks
+        const numChecks = isDedicated ? 2 : 1;
+        
+        // Generate results
+        let resultsHTML = '';
+        
+        for (let i = 0; i < numChecks; i++) {
+            // Roll d100 to determine what is found
+            const roll = GatheringData.rollD100();
+            
+            // Get result from table
+            const result = GatheringData.getResultFromTable(table, roll);
+            
+            if (!result) {
+                resultsHTML += `
+                    <div class="gathering-result-section">
+                        <h4>Check ${i + 1}</h4>
+                        <p class="error-message">No result found for roll ${roll}.</p>
+                    </div>
+                `;
+                continue;
+            }
+            
+            // Process the result
+            const processedResult = GatheringData.processResult(result);
+            
+            // Calculate ability check
+            const dc = processedResult.dc;
+            let abilityCheck = abilityModifier + proficiencyBonus;
+            let rollResult = Math.floor(Math.random() * 20) + 1;
+            
+            // Apply disadvantage if traveling
+            if (isTraveling) {
+                const secondRoll = Math.floor(Math.random() * 20) + 1;
+                rollResult = Math.min(rollResult, secondRoll);
+            }
+            
+            const totalCheck = rollResult + abilityCheck;
+            const isSuccess = totalCheck >= dc;
+            
+            resultsHTML += `
+                <div class="gathering-result-section">
+                    <h4>Check ${i + 1}</h4>
+                    <p class="roll-result">Table Roll: ${roll}</p>
+                    <p class="check-result">Ability Check: ${rollResult} + ${abilityCheck} = ${totalCheck} vs DC ${dc} (${isSuccess ? 'Success' : 'Failure'})</p>
+                    
+                    <div class="gathering-result-items">
+            `;
+            
+            if (isSuccess && processedResult.quantity > 0) {
+                const itemIcon = this.getItemIcon(processedResult.item);
+                
+                resultsHTML += `
+                    <div class="gathering-result-item">
+                        <div class="item-icon"><i class="${itemIcon}"></i></div>
+                        <div class="item-details">
+                            <span class="item-name">${processedResult.item}</span>
+                            <span class="item-quantity">Quantity: ${processedResult.quantity}</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                resultsHTML += `
+                    <p class="no-results">${isSuccess ? 'Nothing useful found.' : 'Failed to gather anything.'}</p>
+                `;
+            }
+            
+            resultsHTML += `
+                    </div>
+                </div>
+            `;
+        }
+        
+        resultsContainer.innerHTML = resultsHTML;
+    },
+    
+    // Get appropriate icon for item type
+    getItemIcon: function(itemName) {
+        const itemNameLower = itemName.toLowerCase();
+        
+        if (itemNameLower.includes('reagent')) {
+            return 'fas fa-flask';
+        } else if (itemNameLower.includes('essence')) {
+            return 'fas fa-magic';
+        } else if (itemNameLower.includes('ingredient') || itemNameLower.includes('food')) {
+            return 'fas fa-drumstick-bite';
+        } else if (itemNameLower.includes('hide') || itemNameLower.includes('carapace')) {
+            return 'fas fa-scroll';
+        } else if (itemNameLower.includes('ore') || itemNameLower.includes('metal')) {
+            return 'fas fa-hammer';
+        } else if (itemNameLower.includes('wood') || itemNameLower.includes('branch')) {
+            return 'fas fa-tree';
+        } else if (itemNameLower.includes('supplies')) {
+            return 'fas fa-box';
+        } else {
+            return 'fas fa-leaf';
+        }
     },
     
     // Render the Loot Generator tool
