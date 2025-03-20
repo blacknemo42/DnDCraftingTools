@@ -776,66 +776,52 @@ const Collecting = {
     // Get appropriate icon for item type
     getItemIcon: function(itemName) {
         const itemNameLower = itemName.toLowerCase();
-        let iconClass = '';
-        let iconColor = '';
         
-        if (itemNameLower.includes('reagent')) {
-            iconClass = 'fas fa-flask';
-            if (itemNameLower.includes('poisonous')) {
-                iconColor = '#7CB342'; // Green for poisonous
-            } else if (itemNameLower.includes('curative')) {
-                iconColor = '#42A5F5'; // Blue for curative
-            } else if (itemNameLower.includes('reactive')) {
-                iconColor = '#FF7043'; // Orange for reactive
-            }
-        } else if (itemNameLower.includes('essence')) {
-            iconClass = 'fas fa-magic';
-            if (itemNameLower.includes('arcane')) {
-                iconColor = '#9C27B0'; // Purple for arcane
-            } else if (itemNameLower.includes('divine')) {
-                iconColor = '#FFD600'; // Gold for divine
-            } else if (itemNameLower.includes('primal')) {
-                iconColor = '#00C853'; // Green for primal
-            }
-        } else if (itemNameLower.includes('ingredient') || itemNameLower.includes('food')) {
-            iconClass = 'fas fa-drumstick-bite';
-            iconColor = '#8D6E63'; // Brown for food
-        } else if (itemNameLower.includes('hide') || itemNameLower.includes('leather') || itemNameLower.includes('carapace')) {
-            iconClass = 'fas fa-scroll';
-            iconColor = '#795548'; // Brown for hide/leather
-        } else if (itemNameLower.includes('ore') || itemNameLower.includes('metal') || itemNameLower.includes('ingot')) {
-            iconClass = 'fas fa-hammer';
-            if (itemNameLower.includes('mithril')) {
-                iconColor = '#90CAF9'; // Light blue for mithril
-            } else if (itemNameLower.includes('adamantine')) {
-                iconColor = '#455A64'; // Dark blue-grey for adamantine
-            } else {
-                iconColor = '#78909C'; // Grey for other metals
-            }
-        } else if (itemNameLower.includes('wood') || itemNameLower.includes('branch')) {
-            iconClass = 'fas fa-tree';
-            iconColor = '#8D6E63'; // Brown for wood
-        } else if (itemNameLower.includes('supplies')) {
-            iconClass = 'fas fa-box';
-            iconColor = '#795548'; // Brown for supplies
-        } else if (itemNameLower.includes('ink') || itemNameLower.includes('parchment')) {
-            iconClass = 'fas fa-feather-alt';
-            iconColor = '#3E2723'; // Dark brown for ink/parchment
-        } else if (itemNameLower.includes('part') || itemNameLower.includes('fancy part') || itemNameLower.includes('esoteric part')) {
-            iconClass = 'fas fa-cogs';
-            iconColor = '#546E7A'; // Blue-grey for parts
-        } else if (itemNameLower.includes('scale')) {
-            iconClass = 'fas fa-dragon';
-            iconColor = '#D32F2F'; // Red for scales
-        } else if (itemNameLower.includes('string')) {
-            iconClass = 'fas fa-cut';
-            iconColor = '#9E9E9E'; // Grey for string
-        } else {
-            iconClass = 'fas fa-leaf';
-            iconColor = '#66BB6A'; // Green for other items
+        // Essences
+        if (itemNameLower.includes('arcane essence')) {
+            return `<i class="fas fa-fire-alt" data-essence="arcane"></i>`;
+        } else if (itemNameLower.includes('divine essence')) {
+            return `<i class="fas fa-sun" data-essence="divine"></i>`;
+        } else if (itemNameLower.includes('primal essence')) {
+            return `<i class="fas fa-leaf" data-essence="primal"></i>`;
+        } else if (itemNameLower.includes('psionic essence')) {
+            return `<i class="fas fa-brain" data-essence="psionic"></i>`;
         }
         
-        return `<i class="${iconClass}" style="color: ${iconColor};"></i>`;
+        // Reagents
+        if (itemNameLower.includes('curative reagent')) {
+            return `<i class="fas fa-flask" data-reagent="curative"></i>`;
+        } else if (itemNameLower.includes('poisonous reagent')) {
+            return `<i class="fas fa-skull-crossbones" data-reagent="poisonous"></i>`;
+        } else if (itemNameLower.includes('reactive reagent')) {
+            return `<i class="fas fa-vial" data-reagent="reactive"></i>`;
+        }
+        
+        // Materials
+        if (itemNameLower.includes('leather') || itemNameLower.includes('hide')) {
+            return '<i class="fas fa-scroll"></i>';
+        } else if (itemNameLower.includes('ingot') || itemNameLower.includes('metal')) {
+            return '<i class="fas fa-hammer"></i>';
+        } else if (itemNameLower.includes('wood') || itemNameLower.includes('branch')) {
+            return '<i class="fas fa-tree"></i>';
+        } else if (itemNameLower.includes('cloth') || itemNameLower.includes('fabric')) {
+            return '<i class="fas fa-tshirt"></i>';
+        } else if (itemNameLower.includes('herb') || itemNameLower.includes('plant')) {
+            return '<i class="fas fa-seedling"></i>';
+        } else if (itemNameLower.includes('gem') || itemNameLower.includes('crystal')) {
+            return '<i class="fas fa-gem"></i>';
+        } else if (itemNameLower.includes('bone') || itemNameLower.includes('tooth')) {
+            return '<i class="fas fa-bone"></i>';
+        } else if (itemNameLower.includes('scale') || itemNameLower.includes('carapace')) {
+            return '<i class="fas fa-shield-alt"></i>';
+        } else if (itemNameLower.includes('part') || itemNameLower.includes('supply')) {
+            return '<i class="fas fa-cogs"></i>';
+        } else if (itemNameLower.includes('ink') || itemNameLower.includes('parchment')) {
+            return '<i class="fas fa-feather-alt"></i>';
+        }
+        
+        // Default icon
+        return '<i class="fas fa-cube"></i>';
     },
     
     // Render the Loot Generator tool
@@ -954,6 +940,7 @@ const Collecting = {
             resultHTML += `<h4>Materials</h4><ul class="loot-materials-list">`;
             materials.forEach(material => {
                 const icon = this.getItemIcon(material.name);
+                
                 resultHTML += `
                     <li>
                         <span class="item-icon">${icon}</span>
@@ -1008,24 +995,154 @@ const Collecting = {
     // Render the Remnant Finder tool
     renderRemnantFinder: function(container) {
         container.innerHTML = `
-            <div class="coming-soon-container">
-                <div class="coming-soon-icon">
-                    <i class="fas fa-tools"></i>
+            <div class="remnant-finder-container">
+                <div class="remnant-finder-form">
+                    <h2>Remnant Finder</h2>
+                    <p class="tool-description">Find magical remnants from creatures that don't leave corpses (Celestials, Elementals, Fiends, etc.)</p>
+                    
+                    <div class="form-group">
+                        <label for="creature-type">Creature Type:</label>
+                        <select id="creature-type" class="loot-select">
+                            <option value="Celestial">Celestial</option>
+                            <option value="Fiend">Fiend</option>
+                            <option value="Elemental">Elemental</option>
+                            <option value="Incorporeal Undead">Incorporeal Undead</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="creature-cr">Challenge Rating (CR):</label>
+                        <input type="number" id="creature-cr" class="loot-select" min="0" value="1" step="1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="creature-count">Number of Creatures:</label>
+                        <input type="number" id="creature-count" class="loot-select" min="1" value="1" max="10">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button id="generate-remnants" class="primary-button">Find Remnants</button>
+                    </div>
                 </div>
-                <h3>Remnant Finder Coming Soon</h3>
-                <p>This tool will help you find magical remnants from creatures that don't leave corpses (Celestials, Elementals, Fiends, etc.).</p>
-                <div class="coming-soon-features">
-                    <h4>Planned Features:</h4>
-                    <ul>
-                        <li>Support for different creature types</li>
-                        <li>CR-based rewards</li>
-                        <li>Essence and reagent generation</li>
-                        <li>Special material generation</li>
-                    </ul>
+                
+                <div class="remnant-finder-result" style="display: none;">
+                    <h3>Remnants Found</h3>
+                    <div id="remnant-result-container"></div>
                 </div>
             </div>
         `;
-    }
+        
+        this.setupRemnantFinderEvents(container);
+    },
+    
+    // Setup event listeners for the Remnant Finder
+    setupRemnantFinderEvents: function(container) {
+        const generateButton = container.querySelector('#generate-remnants');
+        if (generateButton) {
+            generateButton.addEventListener('click', () => {
+                this.generateRemnants(container);
+            });
+        }
+    },
+    
+    // Generate remnants based on creature type and CR
+    generateRemnants: function(container) {
+        const creatureType = container.querySelector('#creature-type').value;
+        const creatureCR = parseFloat(container.querySelector('#creature-cr').value);
+        const creatureCount = parseInt(container.querySelector('#creature-count').value);
+        
+        // Determine CR range
+        let crRange;
+        if (creatureCR <= 4) {
+            crRange = "0-4";
+        } else if (creatureCR <= 10) {
+            crRange = "5-10";
+        } else if (creatureCR <= 16) {
+            crRange = "11-16";
+        } else {
+            crRange = "17+";
+        }
+        
+        // Get the appropriate table
+        const table = RemnantData.remnantTables[crRange][creatureType];
+        
+        // Generate results
+        const results = [];
+        for (let i = 0; i < creatureCount; i++) {
+            const roll = RemnantData.rollD100();
+            const result = RemnantData.getResultFromTable(table, roll);
+            
+            if (result !== "—" && result !== "No result found") {
+                results.push({
+                    roll: roll,
+                    item: result
+                });
+            }
+        }
+        
+        // Display results
+        const resultContainer = container.querySelector('#remnant-result-container');
+        const resultSection = container.querySelector('.remnant-finder-result');
+        
+        if (results.length === 0) {
+            resultContainer.innerHTML = `
+                <div class="no-remnants-message">
+                    <p>No remnants were found from these creatures.</p>
+                </div>
+            `;
+        } else {
+            let resultHTML = `<ul class="remnant-list">`;
+            
+            // Group similar items
+            const groupedResults = {};
+            results.forEach(result => {
+                if (!groupedResults[result.item]) {
+                    groupedResults[result.item] = 1;
+                } else {
+                    groupedResults[result.item]++;
+                }
+            });
+            
+            // Create list items
+            Object.keys(groupedResults).forEach(item => {
+                const quantity = groupedResults[item];
+                const itemNameLower = item.toLowerCase();
+                
+                // Determine the type of item for data attribute
+                let dataAttribute = '';
+                if (itemNameLower.includes('essence')) {
+                    const essenceType = itemNameLower.includes('arcane') ? 'arcane' : 
+                                     itemNameLower.includes('divine') ? 'divine' : 
+                                     itemNameLower.includes('primal') ? 'primal' : 
+                                     itemNameLower.includes('psionic') ? 'psionic' : '';
+                    dataAttribute = `data-essence="${essenceType}"`;
+                } else if (itemNameLower.includes('reagent')) {
+                    const reagentType = itemNameLower.includes('curative') ? 'curative' : 
+                                     itemNameLower.includes('poisonous') ? 'poisonous' : 
+                                     itemNameLower.includes('reactive') ? 'reactive' : '';
+                    dataAttribute = `data-reagent="${reagentType}"`;
+                }
+                
+                const itemIcon = this.getItemIcon(item);
+                
+                resultHTML += `
+                    <li>
+                        <span class="item-icon" ${dataAttribute}>${itemIcon}</span>
+                        <div class="item-details">
+                            <span class="item-name">${item}</span>
+                            <span class="item-quantity">Quantity: ${quantity}</span>
+                        </div>
+                    </li>
+                `;
+            });
+            
+            resultHTML += `</ul>`;
+            resultContainer.innerHTML = resultHTML;
+        }
+        
+        // Show the result section
+        resultSection.style.display = 'block';
+    },
 };
 
 // No export statement - the object is now globally available

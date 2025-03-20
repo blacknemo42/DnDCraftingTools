@@ -8,6 +8,8 @@ All notable changes to the D&D Crafting Tools project will be documented in this
 - Renamed "Purchasing" module to "Shop Tools" for better clarity
 - Refactored file structure to reflect the new naming convention
 - Updated UI elements to use the new naming throughout the application
+- Improved Remnant Finder tool styling to match other generator tools
+- Updated form controls and result display for better user experience
 
 ### Added
 - Added more detailed documentation for the Shop Tools features in README.md
@@ -32,9 +34,13 @@ All notable changes to the D&D Crafting Tools project will be documented in this
     - Support for different CR ranges (0-4, 5-10, 11-16, 17+)
     - Option to replace coins with crafting materials
     - Detailed display of loot results with quantities and values
-  - Added placeholder for Remnant Finder tool
-- Added "Coming Soon" UI for all collecting tools
-- Added CSS styles for the collecting tools and coming soon sections
+  - Implemented Remnant Finder tool with the following features:
+    - Support for finding magical remnants from creatures that don't leave corpses
+    - Filtering by creature type (Celestial, Fiend, Elemental, Incorporeal Undead)
+    - Challenge Rating-based results using the official remnant tables
+    - Color-coded icons for different essence and reagent types
+  - Added "Coming Soon" UI for all collecting tools
+  - Added CSS styles for the collecting tools and coming soon sections
 
 ### Fixed
 - Fixed an issue with the Price Lookup tool where it was trying to access undefined properties
