@@ -17,22 +17,21 @@ src/
 │   │   └── collecting.js
 │   └── Purchasing/     # Shop price references
 │       └── purchasing.js
-└── images/             # Image assets
-
-Docs/
-├── Crafting 1.0.6 - Free Version.pdf  # Original crafting guide
-├── CheatSheets/                       # Markdown cheatsheets for each crafting discipline
-    ├── Alchemy.md                     # Potions and alchemical items
-    ├── Blacksmithing.md               # Weapons and armor
-    ├── Cooking.md                     # Beneficial meals
-    ├── Engineering.md                 # Complex mechanical devices
-    ├── Leatherworking.md              # Leather armor and accessories
-    ├── Poisoncraft.md                 # Poisons and venoms
-    ├── Runecarving.md                 # Magical runes
-    ├── Scrollscribing.md              # Magical scrolls
-    ├── Tinkering.md                   # Small gadgets and contraptions
-    ├── WandWhittling.md               # Magical wands and staves
-    └── Woodcarving.md                 # Wooden weapons and items
+├── images/             # Image assets
+└── docs/               # Documentation and reference materials
+    ├── Crafting 1.0.6 - Free Version.pdf  # Original crafting guide
+    └── CheatSheets/                       # Markdown cheatsheets for each crafting discipline
+        ├── Alchemy.md                     # Potions and alchemical items
+        ├── Blacksmithing.md               # Weapons and armor
+        ├── Cooking.md                     # Beneficial meals
+        ├── Engineering.md                 # Complex mechanical devices
+        ├── Leatherworking.md              # Leather armor and accessories
+        ├── Poisoncraft.md                 # Poisons and venoms
+        ├── Runecarving.md                 # Magical runes
+        ├── Scrollscribing.md              # Magical scrolls
+        ├── Tinkering.md                   # Small gadgets and contraptions
+        ├── WandWhittling.md               # Magical wands and staves
+        └── Woodcarving.md                 # Wooden weapons and items
 ```
 
 ## Features
@@ -56,17 +55,17 @@ This project is structured as a static website with HTML, CSS, and JavaScript.
 
 The following crafting disciplines are covered in this toolkit:
 
-1. **[Alchemy](Docs/CheatSheets/Alchemy.md)**: Creating potions and alchemical items
-2. **[Poisoncraft](Docs/CheatSheets/Poisoncraft.md)**: Creating poisons and venoms
-3. **[Blacksmithing](Docs/CheatSheets/Blacksmithing.md)**: Forging weapons and armor
-4. **[Cooking](Docs/CheatSheets/Cooking.md)**: Preparing beneficial meals
-5. **[Scrollscribing](Docs/CheatSheets/Scrollscribing.md)**: Creating magical scrolls
-6. **[Wand Whittling](Docs/CheatSheets/WandWhittling.md)**: Crafting magical wands and staves
-7. **[Leatherworking](Docs/CheatSheets/Leatherworking.md)**: Working with leather for armor and accessories
-8. **[Woodcarving](Docs/CheatSheets/Woodcarving.md)**: Shaping wood into weapons and items
-9. **[Runecarving](Docs/CheatSheets/Runecarving.md)**: Inscribing magical runes
-10. **[Engineering](Docs/CheatSheets/Engineering.md)**: Building complex mechanical devices
-11. **[Tinkering](Docs/CheatSheets/Tinkering.md)**: Creating small gadgets and contraptions
+1. **[Alchemy](src/docs/CheatSheets/Alchemy.md)**: Creating potions and alchemical items
+2. **[Poisoncraft](src/docs/CheatSheets/Poisoncraft.md)**: Creating poisons and venoms
+3. **[Blacksmithing](src/docs/CheatSheets/Blacksmithing.md)**: Forging weapons and armor
+4. **[Cooking](src/docs/CheatSheets/Cooking.md)**: Preparing beneficial meals
+5. **[Scrollscribing](src/docs/CheatSheets/Scrollscribing.md)**: Creating magical scrolls
+6. **[Wand Whittling](src/docs/CheatSheets/WandWhittling.md)**: Crafting magical wands and staves
+7. **[Leatherworking](src/docs/CheatSheets/Leatherworking.md)**: Working with leather for armor and accessories
+8. **[Woodcarving](src/docs/CheatSheets/Woodcarving.md)**: Shaping wood into weapons and items
+9. **[Runecarving](src/docs/CheatSheets/Runecarving.md)**: Inscribing magical runes
+10. **[Engineering](src/docs/CheatSheets/Engineering.md)**: Building complex mechanical devices
+11. **[Tinkering](src/docs/CheatSheets/Tinkering.md)**: Creating small gadgets and contraptions
 
 Each discipline has its own cheatsheet with detailed information about crafting requirements, materials, difficulty checks, and tips.
 

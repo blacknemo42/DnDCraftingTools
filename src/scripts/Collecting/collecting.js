@@ -1,26 +1,27 @@
 /**
  * Collecting module for D&D Crafting Tools
- * Handles harvesting and looting mechanics
+ * This will contain tools for harvesting materials and looting
  */
 
 const Collecting = {
-    // Will be populated with data from the crafting guide
+    // Initialize the module
     initialize: function() {
         console.log('Collecting module initialized');
-        // Setup functionality will be added here
+        this.renderContent();
     },
     
-    calculateHarvestYield: function(creatureType, creatureCR, skillCheck) {
-        // Function to calculate harvesting results
-        console.log(`Calculating harvest yield for ${creatureType} (CR ${creatureCR}) with skill check ${skillCheck}`);
-        // Implementation will be based on the crafting guide
-    },
-    
-    generateLoot: function(lootTable, diceRoll) {
-        // Function to generate loot based on tables
-        console.log(`Generating loot from table ${lootTable} with roll ${diceRoll}`);
-        // Implementation will be based on the crafting guide
+    // Render the collecting content
+    renderContent: function() {
+        const container = document.querySelector('.collecting-content');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="collecting-placeholder">
+                <h3>Collecting Tools Coming Soon</h3>
+                <p>Tools for harvesting materials and managing loot will be available in a future update.</p>
+            </div>
+        `;
     }
 };
 
-export default Collecting;
+// No export statement - the object is now globally available

@@ -2,82 +2,84 @@
  * Main JavaScript file for D&D Crafting Tools
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     console.log('D&D Crafting Tools initialized');
     
+    // Initialize navigation
+    initNavigation();
+});
+
+/**
+ * Initialize navigation functionality
+ */
+function initNavigation() {
     // Navigation elements
     const cards = document.querySelectorAll('.card');
     const navLinks = document.querySelectorAll('.nav-link');
     const contentSections = document.querySelectorAll('.content-section');
     const cardNavigation = document.getElementById('card-navigation');
     
-    // Function to show a specific content section
-    function showContent(targetId) {
-        // Update active nav link
-        navLinks.forEach(link => {
-            const linkTarget = link.getAttribute('data-target');
-            if (linkTarget === targetId) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
-        });
-        
+    /**
+     * Navigate to a specific section
+     * @param {string} target - The target section ID
+     */
+    function navigateTo(target) {
         // Hide all content sections
         contentSections.forEach(section => {
             section.classList.remove('active');
         });
         
-        // Show the target content section
-        const targetSection = document.getElementById(`${targetId}-content`);
+        // Show the target section
+        const targetSection = document.getElementById(`${target}-content`);
         if (targetSection) {
             targetSection.classList.add('active');
-        }
-        
-        // Show/hide card navigation based on current view
-        if (targetId === 'home') {
-            cardNavigation.style.display = 'grid';
-        } else {
-            cardNavigation.style.display = 'none';
-        }
-        
-        // Initialize the corresponding module if not home
-        if (targetId !== 'home') {
-            initializeModule(targetId);
+            
+            // Hide card navigation if not on home
+            if (target === 'home') {
+                cardNavigation.style.display = 'grid';
+            } else {
+                cardNavigation.style.display = 'none';
+            }
+            
+            // Initialize the module for the target section
+            initializeModule(target);
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
         }
     }
     
-    // Function to initialize a module
+    /**
+     * Initialize a specific module
+     * @param {string} moduleId - The module ID to initialize
+     */
     function initializeModule(moduleId) {
         switch(moduleId) {
             case 'cheatsheets':
-                // Dynamically import and initialize CheatSheets module
-                import('./CheatSheets/cheatsheets.js')
-                    .then(module => {
-                        const CheatSheets = module.default;
-                        CheatSheets.initialize();
-                    })
-                    .catch(err => console.error('Error loading CheatSheets module:', err));
+                // Initialize CheatSheets module
+                if (typeof CheatSheets !== 'undefined') {
+                    CheatSheets.initialize();
+                } else {
+                    console.error('Error loading CheatSheets module');
+                }
                 break;
                 
             case 'collecting':
-                // Dynamically import and initialize Collecting module
-                import('./Collecting/collecting.js')
-                    .then(module => {
-                        const Collecting = module.default;
-                        Collecting.initialize();
-                    })
-                    .catch(err => console.error('Error loading Collecting module:', err));
+                // Initialize Collecting module
+                if (typeof Collecting !== 'undefined') {
+                    Collecting.initialize();
+                } else {
+                    console.error('Error loading Collecting module');
+                }
                 break;
                 
             case 'purchasing':
-                // Dynamically import and initialize Purchasing module
-                import('./Purchasing/purchasing.js')
-                    .then(module => {
-                        const Purchasing = module.default;
-                        Purchasing.initialize();
-                    })
-                    .catch(err => console.error('Error loading Purchasing module:', err));
+                // Initialize Purchasing module
+                if (typeof Purchasing !== 'undefined') {
+                    Purchasing.initialize();
+                } else {
+                    console.error('Error loading Purchasing module');
+                }
                 break;
         }
     }
@@ -87,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('data-target');
-            showContent(targetId);
+            navigateTo(targetId);
         });
     });
     
@@ -95,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cards.forEach(card => {
         card.addEventListener('click', () => {
             const targetId = card.getAttribute('data-target');
-            showContent(targetId);
+            navigateTo(targetId);
         });
     });
     
@@ -104,4 +106,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (homeLink) {
         homeLink.classList.add('active');
     }
-});
+    
+    // Show home section by default
+    const homeSection = document.getElementById('home-content');
+    if (homeSection) {
+        homeSection.classList.add('active');
+    }
+}
+
+/**
+ * Initialize all modules
+ */
+function initModules() {
+    // No need to initialize modules on page load
+    // They will be initialized when navigated to
+}

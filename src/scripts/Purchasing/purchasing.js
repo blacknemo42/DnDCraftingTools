@@ -1,26 +1,27 @@
 /**
  * Purchasing module for D&D Crafting Tools
- * Handles shop prices and item availability
+ * This will contain shop price references for various items
  */
 
 const Purchasing = {
-    // Will be populated with data from the crafting guide
+    // Initialize the module
     initialize: function() {
         console.log('Purchasing module initialized');
-        // Setup functionality will be added here
+        this.renderContent();
     },
     
-    getItemPrice: function(itemName, shopType, settlementSize) {
-        // Function to look up prices for items
-        console.log(`Looking up price for ${itemName} in ${shopType} shop in ${settlementSize} settlement`);
-        // Implementation will be based on the crafting guide
-    },
-    
-    checkAvailability: function(itemName, settlementSize) {
-        // Function to check if an item is available in a given settlement
-        console.log(`Checking availability of ${itemName} in ${settlementSize} settlement`);
-        // Implementation will be based on the crafting guide
+    // Render the purchasing content
+    renderContent: function() {
+        const container = document.querySelector('.purchasing-content');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="purchasing-placeholder">
+                <h3>Purchasing References Coming Soon</h3>
+                <p>Shop price references for various items will be available in a future update.</p>
+            </div>
+        `;
     }
 };
 
-export default Purchasing;
+// No export statement - the object is now globally available

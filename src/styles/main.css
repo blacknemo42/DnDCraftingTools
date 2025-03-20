@@ -193,13 +193,205 @@ main {
     border-radius: 4px;
 }
 
+/* Crafting Role Cards */
+.crafting-role-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.crafting-role-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    cursor: pointer;
+    display: flex;
+    border-left: 4px solid var(--accent-color);
+}
+
+.crafting-role-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.role-icon {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    background-color: var(--accent-color);
+    min-width: 80px;
+}
+
+.role-content {
+    padding: 1.2rem;
+    flex: 1;
+}
+
+.role-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.role-content p {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Cheatsheet Detail View */
+.back-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    transition: background-color var(--transition-speed);
+}
+
+.back-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.cheatsheet-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.cheatsheet-header i {
+    font-size: 2rem;
+}
+
+.cheatsheet-header h2 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.cheatsheet-detail-content {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+}
+
+.cheatsheet-detail-content pre {
+    white-space: pre-wrap;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    overflow-x: auto;
+}
+
+.cheatsheet-detail-content h1 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.cheatsheet-detail-content h2 {
+    color: var(--primary-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.cheatsheet-detail-content h3 {
+    color: var(--secondary-color);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+}
+
+.cheatsheet-detail-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.cheatsheet-detail-content ul, 
+.cheatsheet-detail-content ol {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+.cheatsheet-detail-content li {
+    margin-bottom: 0.5rem;
+}
+
+.cheatsheet-detail-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+}
+
+.cheatsheet-detail-content th {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: left;
+    padding: 0.75rem;
+}
+
+.cheatsheet-detail-content td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.cheatsheet-detail-content tr:nth-child(even) {
+    background-color: rgba(193, 154, 107, 0.1);
+}
+
+.cheatsheet-detail-content tr:hover {
+    background-color: rgba(193, 154, 107, 0.2);
+}
+
+.cheatsheet-detail-content code {
+    background-color: #f5f5f5;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.cheatsheet-detail-content blockquote {
+    border-left: 4px solid var(--accent-color);
+    padding-left: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+    font-style: italic;
+    color: #666;
+}
+
+.error {
+    color: #d32f2f;
+    padding: 1rem;
+    border-left: 4px solid #d32f2f;
+    background-color: rgba(211, 47, 47, 0.1);
+    border-radius: 4px;
+}
+
 /* Footer */
 footer {
     text-align: center;
     padding: 1rem;
     background-color: var(--primary-color);
     color: white;
-    margin-top: auto;
+    margin-top: 2rem;
 }
 
 /* Animations */
@@ -233,5 +425,37 @@ footer {
         white-space: nowrap;
         padding: 0.5rem 0.8rem;
         font-size: 0.85rem;
+    }
+    
+    .crafting-role-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    
+    .role-icon {
+        padding: 1.2rem;
+        font-size: 1.5rem;
+        min-width: 60px;
+    }
+    
+    .role-content {
+        padding: 1rem;
+    }
+    
+    .role-content h3 {
+        font-size: 1.1rem;
+    }
+    
+    .role-content p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .crafting-role-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    main {
+        padding: 1.5rem;
     }
 }
