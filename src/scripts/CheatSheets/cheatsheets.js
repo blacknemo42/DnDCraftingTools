@@ -7,6 +7,13 @@ const CheatSheets = {
     // Crafting roles data with descriptions and icons
     craftingRoles: [
         {
+            id: 'basicrules',
+            name: 'Basic Rules',
+            description: 'Fundamental crafting mechanics',
+            icon: 'fa-book-open',
+            color: '#4B0082' // Indigo
+        },
+        {
             id: 'alchemy',
             name: 'Alchemy',
             description: 'Creating potions and alchemical items',
@@ -198,8 +205,8 @@ const CheatSheets = {
         contentContainer.className = 'cheatsheet-detail-content';
         contentContainer.innerHTML = '<p>Loading cheatsheet content...</p>';
         
-        // Fetch the markdown content - fix the path for local server
-        fetch(`/docs/CheatSheets/${role.name.replace(/\s+/g, '')}.md`)
+        // Fetch the markdown content using a relative path
+        fetch(`docs/CheatSheets/${role.name.replace(/\s+/g, '')}.md`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Cheatsheet not found');

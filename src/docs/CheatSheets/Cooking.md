@@ -11,6 +11,13 @@ Cooking in D&D is the art of preparing food that can provide temporary benefits 
 5. On success, the meal is prepared and provides its benefits
 6. On failure, the ingredients are wasted
 
+## Take 10 Rule
+When not under pressure or distraction, a cook may choose to "Take 10" on a cooking check:
+- Instead of rolling a d20, automatically use a 10 for the roll
+- Total: 10 + WIS/INT modifier + proficiency with cook's utensils
+- This ensures steady results but prevents exceptional meals
+- Useful for preparing meals for a large group where consistency is more important than excellence
+
 ## Common Meals
 | Meal | Ingredients | Crafting Time | DC | Benefits |
 |------|-------------|---------------|-----|----------|

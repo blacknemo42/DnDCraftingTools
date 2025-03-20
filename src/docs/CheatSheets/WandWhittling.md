@@ -11,6 +11,13 @@ Wand Whittling is the art of creating magical wands and staves that can store an
 5. On success, mark 2 hours of progress. Once completed time equals crafting time, the wand is complete
 6. On failure, no progress is made. Three consecutive failures results in loss of all materials
 
+## Take 10 Rule
+When not under pressure or distraction, a wand whittler may choose to "Take 10" on a crafting check:
+- Instead of rolling a d20, automatically use a 10 for the roll
+- Total: 10 + INT/WIS modifier + proficiency with woodcarver's tools
+- This ensures steady progress but prevents exceptional results
+- Useful for basic wands but may not be sufficient for higher-DC magical wands
+
 ## Requirements
 - You must have proficiency with woodcarver's tools
 - For wands with spells, you must have access to the spell (either by knowing it or having a scroll)

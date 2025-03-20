@@ -11,6 +11,13 @@ Scrollscribing is the art of creating magical scrolls that contain spells. It us
 5. On success, mark 2 hours of progress. Once completed time equals crafting time, the scroll is complete
 6. On failure, no progress is made. Three consecutive failures results in loss of all materials
 
+## Take 10 Rule
+When not under pressure or distraction, a scrollscribe may choose to "Take 10" on a crafting check:
+- Instead of rolling a d20, automatically use a 10 for the roll
+- Total: 10 + INT modifier + proficiency with calligrapher's supplies
+- This ensures steady progress but prevents exceptional results
+- Recommended for lower-level scrolls where a 10 + modifiers will reliably meet the DC
+
 ## Requirements
 - You must know the spell you wish to inscribe on the scroll
 - You must be able to cast the spell or have access to the spell through a spellbook or similar source

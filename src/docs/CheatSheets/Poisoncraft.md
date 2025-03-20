@@ -11,6 +11,13 @@ Poisoncraft is a specialized branch of alchemy focused on creating poisons and v
 5. On success, mark 2 hours of progress. Once completed time equals crafting time, the poison is complete
 6. On failure, no progress is made. Three consecutive failures results in loss of all materials
 
+## Take 10 Rule
+When not under pressure or distraction, a poisoncrafter may choose to "Take 10" on a crafting check:
+- Instead of rolling a d20, automatically use a 10 for the roll
+- Total: 10 + INT/WIS modifier + proficiency with poisoner's kit
+- This ensures steady progress but prevents exceptional results
+- Not recommended for high-DC poisons where a higher roll is needed to succeed
+
 ## Poison Types
 - **Contact**: Takes effect when touched
 - **Ingested**: Takes effect when consumed

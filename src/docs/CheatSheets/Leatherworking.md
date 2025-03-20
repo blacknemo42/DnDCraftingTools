@@ -11,6 +11,13 @@ Leatherworking is the art of crafting items from animal hides and skins. It uses
 5. On success, mark 2 hours of progress. Once completed time equals crafting time, the item is complete
 6. On failure, no progress is made. Three consecutive failures results in loss of all materials
 
+## Take 10 Rule
+When not under pressure or distraction, a leatherworker may choose to "Take 10" on a crafting check:
+- Instead of rolling a d20, automatically use a 10 for the roll
+- Total: 10 + DEX/INT modifier + proficiency with leatherworker's tools
+- This ensures steady progress but prevents exceptional results
+- Particularly useful for simple items like pouches, belts, and boots
+
 ## Common Items
 | Item | Materials | Crafting Time | Checks | DC | Value |
 |------|-----------|---------------|--------|-----|-------|

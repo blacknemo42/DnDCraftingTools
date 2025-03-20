@@ -11,6 +11,13 @@ Alchemy is the art of creating potions, oils, and other consumable magical items
 5. On success, mark 2 hours of progress. Once completed time equals crafting time, the potion is complete
 6. On failure, no progress is made. Three consecutive failures results in loss of all materials
 
+## Take 10 Rule
+When not under pressure or distraction, an alchemist may choose to "Take 10" on a crafting check:
+- Instead of rolling a d20, automatically use a 10 for the roll
+- Total: 10 + INT/WIS modifier + proficiency with alchemist's supplies
+- This ensures steady progress but prevents exceptional results
+- Particularly useful for low-DC potions to avoid the risk of consecutive failures
+
 ## Shelf Life
 - Standard potions: 1 year before expiring
 - Potions with reactive ingredients: 1 month before expiring

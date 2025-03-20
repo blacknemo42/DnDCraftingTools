@@ -11,6 +11,13 @@ Runecarving is the art of inscribing magical runes onto objects to imbue them wi
 5. On success, mark 2 hours of progress. Once completed time equals crafting time, the rune is complete
 6. On failure, no progress is made. Three consecutive failures results in loss of all materials
 
+## Take 10 Rule
+When not under pressure or distraction, a runecarver may choose to "Take 10" on a crafting check:
+- Instead of rolling a d20, automatically use a 10 for the roll
+- Total: 10 + INT modifier + proficiency with the appropriate tools
+- This ensures steady progress but prevents exceptional results
+- Not recommended for complex or powerful runes where a higher roll is needed to succeed
+
 ## Rune Types
 - **Weapon Runes**: Enhance weapons with additional damage or properties
 - **Armor Runes**: Enhance armor with protection or special abilities
