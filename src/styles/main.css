@@ -1,3 +1,8 @@
+/* Common icon styles */
+.item-icon i {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7), -1px -1px 1px rgba(0, 0, 0, 0.7), 1px -1px 1px rgba(0, 0, 0, 0.7), -1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
 /* Main CSS for D&D Crafting Tools */
 
 :root {
@@ -609,42 +614,415 @@ main {
     margin: 0;
 }
 
-/* Removed duplicate back-button styles here since they are defined earlier in the file */
+/* Specific icon styles for different components */
+.harvest-result-item .item-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    margin-right: 15px;
+    color: white;
+    font-size: 18px;
+}
 
-.coming-soon-container {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+.gathering-result-item .item-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    margin-right: 15px;
+    color: white;
+    font-size: 18px;
+}
+
+.loot-materials-list .item-icon,
+.loot-coinage-list .item-icon {
+    width: 30px;
     text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
+    margin-right: 10px;
+}
+
+/* Coming Soon Styles */
+.coming-soon-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    padding: 2rem;
+    text-align: center;
 }
 
 .coming-soon-icon {
-    font-size: 48px;
-    color: #666;
-    margin-bottom: 20px;
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
 }
 
 .coming-soon-features {
+    margin-top: 2rem;
     text-align: left;
-    margin-top: 20px;
     background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 4px;
+    padding: 1.5rem;
+    border-radius: 8px;
 }
 
 .coming-soon-features h4 {
-    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
 }
 
 .coming-soon-features ul {
-    padding-left: 20px;
+    padding-left: 1.5rem;
 }
 
 .coming-soon-features li {
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    margin-top: 2rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+    
+    main {
+        padding: 1rem;
+    }
+    
+    .top-nav {
+        padding: 0.5rem 0;
+    }
+    
+    .top-nav ul {
+        justify-content: center;
+        overflow-x: auto;
+        padding: 0.25rem;
+        gap: 0.25rem;
+    }
+    
+    .top-nav a {
+        white-space: nowrap;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+    }
+    
+    .crafting-role-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    
+    .role-icon {
+        padding: 1.2rem;
+        font-size: 1.5rem;
+        min-width: 60px;
+    }
+    
+    .role-content {
+        padding: 1rem;
+    }
+    
+    .role-content h3 {
+        font-size: 1.1rem;
+    }
+    
+    .role-content p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .crafting-role-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    main {
+        padding: 1.5rem;
+    }
+}
+
+/* Gathering Calculator Styles */
+.gathering-calculator-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .gathering-calculator-container {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    
+    .gathering-form, .gathering-results {
+        flex: 1;
+    }
+}
+
+@media (max-width: 767px) {
+    .gathering-calculator-container {
+        flex-direction: column;
+    }
+    
+    .gathering-form, .gathering-results {
+        width: 100%;
+    }
+}
+
+.gathering-form {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gathering-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+}
+
+.gathering-type-description {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #e8f5e9;
+    border-left: 4px solid #4CAF50;
+    border-radius: 4px;
+    font-style: italic;
+}
+
+.gathering-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gathering-results {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gathering-results h3 {
+    color: #4CAF50;
+    margin-top: 0;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+}
+
+.gathering-result-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    border-left: 4px solid #4CAF50;
+}
+
+.gathering-result-section h4 {
+    margin-top: 0;
+    color: #2E7D32;
+}
+
+.roll-result, .check-result {
+    font-family: 'Courier New', monospace;
+    background-color: #e8f5e9;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.gathering-result-items {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gathering-result-item {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.gathering-result-item .item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    margin-right: 15px;
+    color: white;
+    font-size: 18px;
+}
+
+.gathering-result-item .item-icon i {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7), -1px -1px 1px rgba(0, 0, 0, 0.7), 1px -1px 1px rgba(0, 0, 0, 0.7), -1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.item-quantity {
+    color: #666;
+    font-size: 14px;
+}
+
+.error-message {
+    color: #D32F2F;
+    background-color: #FFEBEE;
+    padding: 10px;
+    border-radius: 4px;
+    border-left: 4px solid #D32F2F;
+}
+
+.no-results {
+    color: #757575;
+    font-style: italic;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Loot Generator Styles */
+.loot-generator-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .loot-generator-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.loot-form {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loot-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 16px;
+}
+
+.loot-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.loot-results {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loot-roll-info {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.loot-items {
+    margin-top: 15px;
+}
+
+.loot-materials-list,
+.loot-coinage-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.loot-materials-list li,
+.loot-coinage-list li {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.loot-materials-list li:last-child,
+.loot-coinage-list li:last-child {
+    border-bottom: none;
+}
+
+.item-icon {
+    width: 30px;
+    text-align: center;
+    margin-right: 10px;
+    color: var(--accent-color);
+}
+
+.item-icon i {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7), -1px -1px 1px rgba(0, 0, 0, 0.7), 1px -1px 1px rgba(0, 0, 0, 0.7), -1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.item-quantity {
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 30px;
+    text-align: right;
+}
+
+.loot-note {
+    background-color: #fff8e1;
+    padding: 10px;
+    border-left: 4px solid #ffd54f;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.loot-note p {
+    margin: 5px 0;
+}
+
+.error-message {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.no-results {
+    color: #757575;
+    font-style: italic;
 }
 
 /* Harvest Generator Styles */
@@ -796,16 +1174,13 @@ main {
     border-bottom: none;
 }
 
-.item-icon {
+.harvest-result-item .item-icon {
     width: 40px;
     height: 40px;
-    background-color: #f5f5f5;
+    background-color: var(--accent-color);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-right: 15px;
-    color: #666;
+    color: white;
     font-size: 18px;
 }
 
@@ -823,270 +1198,4 @@ main {
     display: block;
     font-size: 14px;
     color: #666;
-}
-
-/* Coming Soon Styles */
-.coming-soon-container {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: var(--card-shadow);
-    padding: 2rem;
-    text-align: center;
-}
-
-.coming-soon-icon {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.coming-soon-features {
-    margin-top: 2rem;
-    text-align: left;
-    background-color: #f9f9f9;
-    padding: 1.5rem;
-    border-radius: 8px;
-}
-
-.coming-soon-features h4 {
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-}
-
-.coming-soon-features ul {
-    padding-left: 1.5rem;
-}
-
-.coming-soon-features li {
-    margin-bottom: 0.5rem;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: var(--primary-color);
-    color: white;
-    margin-top: 2rem;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .card-container {
-        grid-template-columns: 1fr;
-    }
-    
-    main {
-        padding: 1rem;
-    }
-    
-    .top-nav {
-        padding: 0.5rem 0;
-    }
-    
-    .top-nav ul {
-        justify-content: center;
-        overflow-x: auto;
-        padding: 0.25rem;
-        gap: 0.25rem;
-    }
-    
-    .top-nav a {
-        white-space: nowrap;
-        padding: 0.5rem 0.8rem;
-        font-size: 0.85rem;
-    }
-    
-    .crafting-role-grid {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    }
-    
-    .role-icon {
-        padding: 1.2rem;
-        font-size: 1.5rem;
-        min-width: 60px;
-    }
-    
-    .role-content {
-        padding: 1rem;
-    }
-    
-    .role-content h3 {
-        font-size: 1.1rem;
-    }
-    
-    .role-content p {
-        font-size: 0.85rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .crafting-role-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    main {
-        padding: 1.5rem;
-    }
-}
-
-/* Gathering Calculator Styles */
-.gathering-calculator-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.gathering-form {
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.gathering-select {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-}
-
-.gathering-type-description {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #e8f5e9;
-    border-left: 4px solid #4CAF50;
-    border-radius: 4px;
-    font-style: italic;
-}
-
-.gathering-options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.gathering-results {
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.gathering-results h3 {
-    color: #4CAF50;
-    margin-top: 0;
-    border-bottom: 2px solid #4CAF50;
-    padding-bottom: 10px;
-}
-
-.gathering-result-section {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 6px;
-    border-left: 4px solid #4CAF50;
-}
-
-.gathering-result-section h4 {
-    margin-top: 0;
-    color: #2E7D32;
-}
-
-.roll-result, .check-result {
-    font-family: 'Courier New', monospace;
-    background-color: #e8f5e9;
-    padding: 5px 10px;
-    border-radius: 4px;
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.gathering-result-items {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.gathering-result-item {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    padding: 10px;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.item-icon {
-    width: 40px;
-    height: 40px;
-    background-color: #4CAF50;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
-    color: white;
-    font-size: 18px;
-}
-
-.item-details {
-    display: flex;
-    flex-direction: column;
-}
-
-.item-name {
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.item-quantity {
-    color: #666;
-    font-size: 14px;
-}
-
-.error-message {
-    color: #D32F2F;
-    background-color: #FFEBEE;
-    padding: 10px;
-    border-radius: 4px;
-    border-left: 4px solid #D32F2F;
-}
-
-.no-results {
-    color: #757575;
-    font-style: italic;
-    padding: 10px;
-    text-align: center;
-}
-
-/* Responsive styles for Gathering Calculator */
-@media (min-width: 768px) {
-    .gathering-calculator-container {
-        flex-direction: row;
-        align-items: flex-start;
-    }
-    
-    .gathering-form, .gathering-results {
-        flex: 1;
-    }
-}
-
-@media (max-width: 767px) {
-    .gathering-calculator-container {
-        flex-direction: column;
-    }
-    
-    .gathering-form, .gathering-results {
-        width: 100%;
-    }
 }

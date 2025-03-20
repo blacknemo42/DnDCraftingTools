@@ -354,7 +354,7 @@ const Collecting = {
                 if (hideResult.quantity > 0) {
                     resultsHTML += `
                         <div class="harvest-result-item">
-                            <div class="item-icon"><i class="fas fa-scroll"></i></div>
+                            <div class="item-icon">${this.getItemIcon(hideResult.item)}</div>
                             <div class="item-details">
                                 <span class="item-name">${hideResult.item}</span>
                                 <span class="item-quantity">Quantity: ${hideResult.quantity}</span>
@@ -366,7 +366,7 @@ const Collecting = {
                 if (meatResult.quantity > 0) {
                     resultsHTML += `
                         <div class="harvest-result-item">
-                            <div class="item-icon"><i class="fas fa-drumstick-bite"></i></div>
+                            <div class="item-icon">${this.getItemIcon(meatResult.item)}</div>
                             <div class="item-details">
                                 <span class="item-name">${meatResult.item}</span>
                                 <span class="item-quantity">Quantity: ${meatResult.quantity}</span>
@@ -403,7 +403,7 @@ const Collecting = {
                     if (processedResult.quantity > 0) {
                         resultsHTML += `
                             <div class="harvest-result-item">
-                                <div class="item-icon"><i class="fas fa-fire-alt"></i></div>
+                                <div class="item-icon">${this.getItemIcon(processedResult.item)}</div>
                                 <div class="item-details">
                                     <span class="item-name">${processedResult.item}</span>
                                     <span class="item-quantity">Quantity: ${processedResult.quantity}</span>
@@ -751,7 +751,7 @@ const Collecting = {
                 
                 resultsHTML += `
                     <div class="gathering-result-item">
-                        <div class="item-icon"><i class="${itemIcon}"></i></div>
+                        <div class="item-icon">${itemIcon}</div>
                         <div class="item-details">
                             <span class="item-name">${processedResult.item}</span>
                             <span class="item-quantity">Quantity: ${processedResult.quantity}</span>
@@ -776,46 +776,233 @@ const Collecting = {
     // Get appropriate icon for item type
     getItemIcon: function(itemName) {
         const itemNameLower = itemName.toLowerCase();
+        let iconClass = '';
+        let iconColor = '';
         
         if (itemNameLower.includes('reagent')) {
-            return 'fas fa-flask';
+            iconClass = 'fas fa-flask';
+            if (itemNameLower.includes('poisonous')) {
+                iconColor = '#7CB342'; // Green for poisonous
+            } else if (itemNameLower.includes('curative')) {
+                iconColor = '#42A5F5'; // Blue for curative
+            } else if (itemNameLower.includes('reactive')) {
+                iconColor = '#FF7043'; // Orange for reactive
+            }
         } else if (itemNameLower.includes('essence')) {
-            return 'fas fa-magic';
+            iconClass = 'fas fa-magic';
+            if (itemNameLower.includes('arcane')) {
+                iconColor = '#9C27B0'; // Purple for arcane
+            } else if (itemNameLower.includes('divine')) {
+                iconColor = '#FFD600'; // Gold for divine
+            } else if (itemNameLower.includes('primal')) {
+                iconColor = '#00C853'; // Green for primal
+            }
         } else if (itemNameLower.includes('ingredient') || itemNameLower.includes('food')) {
-            return 'fas fa-drumstick-bite';
-        } else if (itemNameLower.includes('hide') || itemNameLower.includes('carapace')) {
-            return 'fas fa-scroll';
-        } else if (itemNameLower.includes('ore') || itemNameLower.includes('metal')) {
-            return 'fas fa-hammer';
+            iconClass = 'fas fa-drumstick-bite';
+            iconColor = '#8D6E63'; // Brown for food
+        } else if (itemNameLower.includes('hide') || itemNameLower.includes('leather') || itemNameLower.includes('carapace')) {
+            iconClass = 'fas fa-scroll';
+            iconColor = '#795548'; // Brown for hide/leather
+        } else if (itemNameLower.includes('ore') || itemNameLower.includes('metal') || itemNameLower.includes('ingot')) {
+            iconClass = 'fas fa-hammer';
+            if (itemNameLower.includes('mithril')) {
+                iconColor = '#90CAF9'; // Light blue for mithril
+            } else if (itemNameLower.includes('adamantine')) {
+                iconColor = '#455A64'; // Dark blue-grey for adamantine
+            } else {
+                iconColor = '#78909C'; // Grey for other metals
+            }
         } else if (itemNameLower.includes('wood') || itemNameLower.includes('branch')) {
-            return 'fas fa-tree';
+            iconClass = 'fas fa-tree';
+            iconColor = '#8D6E63'; // Brown for wood
         } else if (itemNameLower.includes('supplies')) {
-            return 'fas fa-box';
+            iconClass = 'fas fa-box';
+            iconColor = '#795548'; // Brown for supplies
+        } else if (itemNameLower.includes('ink') || itemNameLower.includes('parchment')) {
+            iconClass = 'fas fa-feather-alt';
+            iconColor = '#3E2723'; // Dark brown for ink/parchment
+        } else if (itemNameLower.includes('part') || itemNameLower.includes('fancy part') || itemNameLower.includes('esoteric part')) {
+            iconClass = 'fas fa-cogs';
+            iconColor = '#546E7A'; // Blue-grey for parts
+        } else if (itemNameLower.includes('scale')) {
+            iconClass = 'fas fa-dragon';
+            iconColor = '#D32F2F'; // Red for scales
+        } else if (itemNameLower.includes('string')) {
+            iconClass = 'fas fa-cut';
+            iconColor = '#9E9E9E'; // Grey for string
         } else {
-            return 'fas fa-leaf';
+            iconClass = 'fas fa-leaf';
+            iconColor = '#66BB6A'; // Green for other items
         }
+        
+        return `<i class="${iconClass}" style="color: ${iconColor};"></i>`;
     },
     
     // Render the Loot Generator tool
     renderLootGenerator: function(container) {
         container.innerHTML = `
-            <div class="coming-soon-container">
-                <div class="coming-soon-icon">
-                    <i class="fas fa-tools"></i>
+            <div class="loot-generator-container">
+                <h2>Humanoid Loot Generator</h2>
+                <p class="tool-description">Generate loot from humanoid creatures based on their Challenge Rating (CR).</p>
+                
+                <div class="loot-form">
+                    <div class="form-group">
+                        <label for="cr-range">Challenge Rating Range:</label>
+                        <select id="cr-range" class="loot-select">
+                            <option value="">-- Select CR Range --</option>
+                            ${LootData.crRanges.map(range => `<option value="${range.id}">${range.name} (${range.description})</option>`).join('')}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Loot Options:</label>
+                        <div class="loot-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="replace-coins" checked>
+                                <span class="checkbox-label">Replace Coins with Materials</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button id="generate-loot" class="primary-button">Generate Loot</button>
+                        <button id="reset-loot" class="secondary-button">Reset</button>
+                    </div>
                 </div>
-                <h3>Loot Generator Coming Soon</h3>
-                <p>This tool will generate loot from humanoid creatures based on their Challenge Rating (CR).</p>
-                <div class="coming-soon-features">
-                    <h4>Planned Features:</h4>
-                    <ul>
-                        <li>Generate individual treasure</li>
-                        <li>Generate hoard treasure</li>
-                        <li>Options to replace coins with crafting materials</li>
-                        <li>Support for different CR ranges</li>
-                    </ul>
+                
+                <div class="loot-results">
+                    <h3>Loot Results</h3>
+                    <div id="loot-results-container">
+                        <p class="no-results">Select a CR range and click "Generate Loot" to see results.</p>
+                    </div>
                 </div>
             </div>
         `;
+        
+        // Add event listeners
+        this.setupLootGeneratorEvents(container);
+    },
+    
+    // Setup event listeners for the Loot Generator
+    setupLootGeneratorEvents: function(container) {
+        const generateButton = container.querySelector('#generate-loot');
+        const resetButton = container.querySelector('#reset-loot');
+        const crRangeSelect = container.querySelector('#cr-range');
+        const replaceCoinsCheck = container.querySelector('#replace-coins');
+        
+        // Generate loot when button is clicked
+        generateButton.addEventListener('click', () => {
+            this.generateLoot(container);
+        });
+        
+        // Reset form when reset button is clicked
+        resetButton.addEventListener('click', () => {
+            crRangeSelect.value = '';
+            replaceCoinsCheck.checked = true;
+            
+            const resultsContainer = container.querySelector('#loot-results-container');
+            resultsContainer.innerHTML = '<p class="no-results">Select a CR range and click "Generate Loot" to see results.</p>';
+        });
+    },
+    
+    // Generate loot based on CR range
+    generateLoot: function(container) {
+        const crRangeSelect = container.querySelector('#cr-range');
+        const replaceCoinsCheck = container.querySelector('#replace-coins');
+        const resultsContainer = container.querySelector('#loot-results-container');
+        
+        // Validate inputs
+        if (!crRangeSelect.value) {
+            resultsContainer.innerHTML = '<p class="error-message">Please select a Challenge Rating range.</p>';
+            return;
+        }
+        
+        const crRange = crRangeSelect.value;
+        const replaceCoins = replaceCoinsCheck.checked;
+        
+        // Get the appropriate loot table
+        const lootTable = LootData.individualTreasureTables[crRange];
+        if (!lootTable) {
+            resultsContainer.innerHTML = '<p class="error-message">Invalid CR range selected.</p>';
+            return;
+        }
+        
+        // Roll on the loot table
+        const roll = LootData.rollD100();
+        const lootResult = LootData.getResultFromTable(lootTable, roll);
+        
+        if (!lootResult) {
+            resultsContainer.innerHTML = '<p class="error-message">Failed to generate loot. Please try again.</p>';
+            return;
+        }
+        
+        // Process materials and coinage
+        const materials = LootData.processMaterials(lootResult.materials);
+        const coinage = replaceCoins ? [] : LootData.processCoinage(lootResult.coinage);
+        
+        // Build the result HTML
+        let resultHTML = `
+            <div class="loot-roll-info">
+                <p><strong>Roll:</strong> ${roll} (${lootResult.range[0]}-${lootResult.range[1]})</p>
+                <p><strong>Value:</strong> ${lootResult.value}</p>
+            </div>
+            <div class="loot-items">
+        `;
+        
+        // Add materials to the result
+        if (materials.length > 0) {
+            resultHTML += `<h4>Materials</h4><ul class="loot-materials-list">`;
+            materials.forEach(material => {
+                const icon = this.getItemIcon(material.name);
+                resultHTML += `
+                    <li>
+                        <span class="item-icon">${icon}</span>
+                        <span class="item-quantity">${material.quantity}</span>
+                        <span class="item-name">${material.name}</span>
+                    </li>
+                `;
+            });
+            resultHTML += `</ul>`;
+        }
+        
+        // Add coinage to the result if not replaced
+        if (coinage.length > 0) {
+            resultHTML += `<h4>Coinage</h4><ul class="loot-coinage-list">`;
+            coinage.forEach(coin => {
+                let coinIcon = '';
+                switch (coin.type) {
+                    case 'cp': coinIcon = '<i class="fas fa-coins" style="color: #B87333;"></i>'; break; // Copper
+                    case 'sp': coinIcon = '<i class="fas fa-coins" style="color: #C0C0C0;"></i>'; break; // Silver
+                    case 'gp': coinIcon = '<i class="fas fa-coins" style="color: #FFD700;"></i>'; break; // Gold
+                    case 'pp': coinIcon = '<i class="fas fa-coins" style="color: #E5E4E2;"></i>'; break; // Platinum
+                    default: coinIcon = '<i class="fas fa-coins"></i>';
+                }
+                
+                resultHTML += `
+                    <li>
+                        <span class="item-icon">${coinIcon}</span>
+                        <span class="item-quantity">${coin.quantity}</span>
+                        <span class="item-name">${coin.type}</span>
+                    </li>
+                `;
+            });
+            resultHTML += `</ul>`;
+        }
+        
+        // Add note about coin replacement
+        if (replaceCoins && lootResult.coinage) {
+            resultHTML += `
+                <div class="loot-note">
+                    <p><em>Note: Coins have been replaced with materials as per your selection.</em></p>
+                    <p><em>Original coinage would have been: ${lootResult.coinage}</em></p>
+                </div>
+            `;
+        }
+        
+        resultHTML += `</div>`;
+        
+        // Display the result
+        resultsContainer.innerHTML = resultHTML;
     },
     
     // Render the Remnant Finder tool

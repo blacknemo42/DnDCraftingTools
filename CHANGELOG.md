@@ -27,7 +27,11 @@ All notable changes to the D&D Crafting Tools project will be documented in this
     - Game hunting calculations
     - Ability to simulate traveling vs dedicated gathering
     - Ability check mechanics with proficiency bonus
-  - Added placeholder for Loot Generator tool
+  - Implemented Loot Generator tool with the following features:
+    - Generate individual treasure from humanoid creatures
+    - Support for different CR ranges (0-4, 5-10, 11-16, 17+)
+    - Option to replace coins with crafting materials
+    - Detailed display of loot results with quantities and values
   - Added placeholder for Remnant Finder tool
 - Added "Coming Soon" UI for all collecting tools
 - Added CSS styles for the collecting tools and coming soon sections
