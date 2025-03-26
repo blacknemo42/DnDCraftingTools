@@ -16,16 +16,9 @@ const ShopTools = {
         {
             id: 'shop-generator',
             name: 'Shop Generator',
-            description: 'Generate a random shop inventory based on location and size',
+            description: 'Generate a random shop inventory based on location and size with haggling functionality',
             icon: 'fa-store',
             color: '#2196F3'
-        },
-        {
-            id: 'haggling-calculator',
-            name: 'Haggling Calculator',
-            description: 'Calculate adjusted prices based on character skills and shop circumstances',
-            icon: 'fa-comments-dollar',
-            color: '#FF9800'
         }
     ],
     
@@ -104,46 +97,29 @@ const ShopTools = {
     
     // Load a specific shop tool
     loadTool: function(tool) {
-        console.log(`Loading shop tool: ${tool.name}`);
-        
-        // Save current scroll position
-        const scrollPosition = window.scrollY;
-        
         const container = document.querySelector('.shop-tools-content');
         if (!container) return;
         
-        // Clear the container
+        // Clear existing content
         container.innerHTML = '';
         
-        // Create back button
+        // Create a back button
         const backButton = document.createElement('button');
         backButton.className = 'back-button';
-        backButton.innerHTML = '<i class="fas fa-arrow-left"></i> Back to Tools';
+        backButton.innerHTML = '<i class="fas fa-arrow-left"></i> Back to Shop Tools';
         backButton.addEventListener('click', () => {
             this.renderToolCards();
-            this.setupEventListeners();
         });
-        
-        // Create header
-        const header = document.createElement('div');
-        header.className = 'tool-header';
-        header.style.borderColor = tool.color;
-        
-        const headerIcon = document.createElement('i');
-        headerIcon.className = `fas ${tool.icon}`;
-        headerIcon.style.color = tool.color;
-        
-        const headerTitle = document.createElement('h2');
-        headerTitle.textContent = tool.name;
-        
-        header.appendChild(headerIcon);
-        header.appendChild(headerTitle);
         
         // Create content container
         const contentContainer = document.createElement('div');
         contentContainer.className = 'tool-content-container';
         
-        // Load the appropriate tool content
+        // Add back button and content container
+        container.appendChild(backButton);
+        container.appendChild(contentContainer);
+        
+        // Load the appropriate tool
         switch (tool.id) {
             case 'price-lookup':
                 this.renderPriceLookupTool(contentContainer);
@@ -151,20 +127,10 @@ const ShopTools = {
             case 'shop-generator':
                 this.renderShopGeneratorTool(contentContainer);
                 break;
-            case 'haggling-calculator':
-                contentContainer.innerHTML = '<p>Haggling Calculator coming soon...</p>';
-                break;
             default:
-                contentContainer.innerHTML = '<p>Tool content not available.</p>';
+                contentContainer.innerHTML = '<p>Tool not implemented yet</p>';
+                break;
         }
-        
-        // Append everything to the container
-        container.appendChild(backButton);
-        container.appendChild(header);
-        container.appendChild(contentContainer);
-        
-        // Restore scroll position
-        window.scrollTo(0, scrollPosition);
     },
     
     // Render the Price Lookup tool
@@ -417,6 +383,52 @@ const ShopTools = {
                         <!-- Shop inventory will be displayed here -->
                     </div>
                 </div>
+                
+                <div class="shopping-cart" style="display: none;">
+                    <div class="cart-header">
+                        <h3>Shopping Cart</h3>
+                        <div class="haggle-controls">
+                            <label for="global-haggle">Global Haggle Adjustment:</label>
+                            <div class="haggle-slider-container">
+                                <input type="range" id="global-haggle" min="50" max="150" value="100" class="haggle-slider">
+                                <span id="global-haggle-value"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="cart-items-container">
+                        <table class="cart-table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Base Price</th>
+                                    <th>Haggle %</th>
+                                    <th>Final Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cart-items">
+                                <!-- Cart items will be displayed here -->
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" class="cart-total-label">Total:</td>
+                                    <td id="cart-total" class="cart-total-value">0 gp</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    
+                    <div class="cart-empty-message" style="display: block;">
+                        <p>Your shopping cart is empty. Add items from the shop inventory.</p>
+                    </div>
+                    
+                    <div class="cart-actions">
+                        <button id="clear-cart" class="secondary-button">Clear Cart</button>
+                    </div>
+                </div>
             </div>
         `;
         
@@ -441,6 +453,43 @@ const ShopTools = {
         // Generate shop inventory when button is clicked
         generateButton.addEventListener('click', () => {
             this.generateShop(container);
+        });
+        
+        // Setup haggling controls
+        const globalHaggleSlider = container.querySelector('#global-haggle');
+        const globalHaggleValue = container.querySelector('#global-haggle-value');
+        
+        // Update value when slider changes
+        globalHaggleSlider.addEventListener('input', () => {
+            const value = globalHaggleSlider.value;
+            globalHaggleValue.textContent = '';
+            globalHaggleValue.innerHTML = `<input type="number" min="50" max="150" value="${value}" class="haggle-input" id="global-haggle-input">%`;
+            
+            const haggleInput = container.querySelector('#global-haggle-input');
+            haggleInput.addEventListener('change', () => {
+                const newValue = Math.min(150, Math.max(50, haggleInput.value));
+                haggleInput.value = newValue;
+                globalHaggleSlider.value = newValue;
+                this.updateAllHaggleValues(container, newValue);
+            });
+            
+            this.updateAllHaggleValues(container, value);
+        });
+        
+        // Initialize the global haggle input
+        globalHaggleValue.innerHTML = `<input type="number" min="50" max="150" value="100" class="haggle-input" id="global-haggle-input">%`;
+        const haggleInput = container.querySelector('#global-haggle-input');
+        haggleInput.addEventListener('change', () => {
+            const newValue = Math.min(150, Math.max(50, haggleInput.value));
+            haggleInput.value = newValue;
+            globalHaggleSlider.value = newValue;
+            this.updateAllHaggleValues(container, newValue);
+        });
+        
+        // Setup clear cart button
+        const clearCartButton = container.querySelector('#clear-cart');
+        clearCartButton.addEventListener('click', () => {
+            this.clearCart(container);
         });
     },
     
@@ -490,8 +539,9 @@ const ShopTools = {
         // Display inventory
         this.displayShopInventory(container, inventory);
         
-        // Show result section
+        // Show result section and shopping cart
         container.querySelector('.shop-generator-result').style.display = 'block';
+        container.querySelector('.shopping-cart').style.display = 'block';
     },
     
     // Display shop inventory
@@ -526,6 +576,7 @@ const ShopTools = {
                         <th>Used For</th>
                         <th>Quantity</th>
                         <th>Price</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -539,6 +590,16 @@ const ShopTools = {
                         <td>${item.usedFor}</td>
                         <td>${item.quantity}</td>
                         <td>${item.adjustedPrice}</td>
+                        <td>
+                            <button class="add-to-cart-btn" 
+                                data-item-name="${item.name}" 
+                                data-item-category="${item.category}" 
+                                data-item-rarity="${item.rarity}" 
+                                data-item-used-for="${item.usedFor}" 
+                                data-item-price="${item.adjustedPrice}">
+                                <i class="fas fa-cart-plus"></i> Add
+                            </button>
+                        </td>
                     </tr>
                 `;
             });
@@ -547,6 +608,186 @@ const ShopTools = {
         });
         
         inventoryContainer.innerHTML = inventoryHTML;
+        
+        // Add event listeners to "Add to Cart" buttons
+        const addToCartButtons = inventoryContainer.querySelectorAll('.add-to-cart-btn');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const itemData = {
+                    name: button.dataset.itemName,
+                    category: button.dataset.itemCategory,
+                    rarity: button.dataset.itemRarity,
+                    usedFor: button.dataset.itemUsedFor,
+                    price: button.dataset.itemPrice
+                };
+                this.addToCart(container, itemData);
+            });
+        });
+    },
+    
+    // Add item to shopping cart
+    addToCart: function(container, itemData) {
+        const cartItems = container.querySelector('#cart-items');
+        const cartEmptyMessage = container.querySelector('.cart-empty-message');
+        const globalHaggleInput = container.querySelector('#global-haggle-input');
+        const globalHaggleValue = globalHaggleInput ? globalHaggleInput.value : 100;
+        
+        // Check if item already exists in cart
+        const existingItem = cartItems.querySelector(`tr[data-item-name="${itemData.name}"]`);
+        
+        if (existingItem) {
+            // Update quantity
+            const quantityInput = existingItem.querySelector('.cart-item-quantity');
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+            this.updateCartItemTotal(existingItem);
+        } else {
+            // Extract numeric price value
+            const priceMatch = itemData.price.match(/(\d+(?:,\d+)?)\s*([a-z]+)/i);
+            if (!priceMatch) return;
+            
+            const [_, priceValue, currency] = priceMatch;
+            const basePrice = parseFloat(priceValue.replace(/,/g, ''));
+            
+            // Create new cart item row
+            const newRow = document.createElement('tr');
+            newRow.dataset.itemName = itemData.name;
+            newRow.dataset.basePrice = basePrice;
+            newRow.dataset.currency = currency;
+            
+            newRow.innerHTML = `
+                <td>${itemData.name}</td>
+                <td>
+                    <input type="number" min="1" value="1" class="cart-item-quantity">
+                </td>
+                <td>${basePrice} ${currency}</td>
+                <td>
+                    <div class="haggle-slider-container">
+                        <input type="range" min="50" max="150" value="${globalHaggleValue}" class="haggle-slider cart-item-haggle">
+                        <span class="haggle-value">
+                            <input type="number" min="50" max="150" value="${globalHaggleValue}" class="haggle-input cart-item-haggle-input">%
+                        </span>
+                    </div>
+                </td>
+                <td class="cart-item-total">${basePrice} ${currency}</td>
+                <td>
+                    <button class="remove-from-cart-btn"><i class="fas fa-trash"></i></button>
+                </td>
+            `;
+            
+            cartItems.appendChild(newRow);
+            
+            // Add event listeners to the new row
+            const quantityInput = newRow.querySelector('.cart-item-quantity');
+            const haggleSlider = newRow.querySelector('.cart-item-haggle');
+            const haggleInput = newRow.querySelector('.cart-item-haggle-input');
+            const removeButton = newRow.querySelector('.remove-from-cart-btn');
+            
+            quantityInput.addEventListener('change', () => {
+                this.updateCartItemTotal(newRow);
+            });
+            
+            haggleSlider.addEventListener('input', () => {
+                const value = haggleSlider.value;
+                haggleInput.value = value;
+                this.updateCartItemTotal(newRow);
+            });
+            
+            haggleInput.addEventListener('change', () => {
+                const newValue = Math.min(150, Math.max(50, haggleInput.value));
+                haggleInput.value = newValue;
+                haggleSlider.value = newValue;
+                this.updateCartItemTotal(newRow);
+            });
+            
+            removeButton.addEventListener('click', () => {
+                newRow.remove();
+                this.updateCartTotal(container);
+                
+                // Show empty message if cart is empty
+                if (cartItems.children.length === 0) {
+                    cartEmptyMessage.style.display = 'block';
+                }
+            });
+        }
+        
+        // Hide empty message
+        cartEmptyMessage.style.display = 'none';
+        
+        // Update cart total
+        this.updateCartTotal(container);
+    },
+    
+    // Update the total for a single cart item
+    updateCartItemTotal: function(cartItemRow) {
+        const basePrice = parseFloat(cartItemRow.dataset.basePrice);
+        const currency = cartItemRow.dataset.currency;
+        const quantity = parseInt(cartItemRow.querySelector('.cart-item-quantity').value);
+        const haggleInput = cartItemRow.querySelector('.cart-item-haggle-input');
+        const hagglePercent = parseInt(haggleInput ? haggleInput.value : 100);
+        
+        // Calculate adjusted price
+        const adjustedPrice = basePrice * (hagglePercent / 100);
+        const totalPrice = adjustedPrice * quantity;
+        
+        // Update total cell
+        cartItemRow.querySelector('.cart-item-total').textContent = `${totalPrice.toFixed(0)} ${currency}`;
+        
+        // Update cart total
+        const container = cartItemRow.closest('.shop-generator-container');
+        this.updateCartTotal(container);
+    },
+    
+    // Update all haggle values based on global haggle slider
+    updateAllHaggleValues: function(container, globalValue) {
+        const cartItems = container.querySelectorAll('#cart-items tr');
+        
+        cartItems.forEach(row => {
+            const haggleSlider = row.querySelector('.cart-item-haggle');
+            const haggleInput = row.querySelector('.cart-item-haggle-input');
+            
+            if (haggleSlider && haggleInput) {
+                haggleSlider.value = globalValue;
+                haggleInput.value = globalValue;
+                this.updateCartItemTotal(row);
+            }
+        });
+    },
+    
+    // Update the cart total
+    updateCartTotal: function(container) {
+        const cartItems = container.querySelectorAll('#cart-items tr');
+        const cartTotal = container.querySelector('#cart-total');
+        
+        let total = 0;
+        let currency = 'gp'; // Default currency
+        
+        cartItems.forEach(row => {
+            const totalCell = row.querySelector('.cart-item-total');
+            const totalMatch = totalCell.textContent.match(/(\d+(?:,\d+)?)\s*([a-z]+)/i);
+            
+            if (totalMatch) {
+                const [_, totalValue, itemCurrency] = totalMatch;
+                total += parseFloat(totalValue.replace(/,/g, ''));
+                currency = itemCurrency; // Use the last currency found
+            }
+        });
+        
+        cartTotal.textContent = `${total.toFixed(0)} ${currency}`;
+    },
+    
+    // Clear the shopping cart
+    clearCart: function(container) {
+        const cartItems = container.querySelector('#cart-items');
+        const cartEmptyMessage = container.querySelector('.cart-empty-message');
+        
+        // Remove all cart items
+        cartItems.innerHTML = '';
+        
+        // Show empty message
+        cartEmptyMessage.style.display = 'block';
+        
+        // Update cart total
+        this.updateCartTotal(container);
     }
 };
 

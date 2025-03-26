@@ -10,6 +10,7 @@ All notable changes to the D&D Crafting Tools project will be documented in this
 - Updated UI elements to use the new naming throughout the application
 - Improved Remnant Finder tool styling to match other generator tools
 - Updated form controls and result display for better user experience
+- Integrated haggling functionality directly into the Shop Generator tool, removing the separate Haggling Calculator card for a more streamlined experience
 
 ### Added
 - Added more detailed documentation for the Shop Tools features in README.md
@@ -48,6 +49,12 @@ All notable changes to the D&D Crafting Tools project will be documented in this
     - Dynamic shop availability based on settlement size
     - Inventory generation with appropriate quantities and adjusted prices
     - Color-coded display of items by rarity
+    - Shopping cart functionality with the following features:
+      - Add items to cart with quantity controls
+      - Global haggling adjustment slider with manual percentage input
+      - Individual item haggling controls with manual percentage input
+      - Real-time price calculation based on haggling percentages
+      - Clear cart functionality
 
 ### Fixed
 - Fixed an issue with the Price Lookup tool where it was trying to access undefined properties
