@@ -81,6 +81,15 @@ function initNavigation() {
                     console.error('Error loading ShopTools module');
                 }
                 break;
+                
+            case 'craftingtables':
+                // Initialize CraftingTables module
+                if (typeof CraftingTables !== 'undefined') {
+                    CraftingTables.initialize();
+                } else {
+                    console.error('Error loading CraftingTables module');
+                }
+                break;
         }
     }
     
