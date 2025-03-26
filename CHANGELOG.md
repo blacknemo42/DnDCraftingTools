@@ -41,6 +41,13 @@ All notable changes to the D&D Crafting Tools project will be documented in this
     - Color-coded icons for different essence and reagent types
   - Added "Coming Soon" UI for all collecting tools
   - Added CSS styles for the collecting tools and coming soon sections
+- Shop Tools Module
+  - Implemented Shop Generator tool with the following features:
+    - Generate shop inventories based on shop type, size, and settlement
+    - Support for different shop types (General Store, Blacksmith, Tanner, etc.)
+    - Dynamic shop availability based on settlement size
+    - Inventory generation with appropriate quantities and adjusted prices
+    - Color-coded display of items by rarity
 
 ### Fixed
 - Fixed an issue with the Price Lookup tool where it was trying to access undefined properties

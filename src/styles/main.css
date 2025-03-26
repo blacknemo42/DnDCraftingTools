@@ -1357,3 +1357,98 @@ footer {
 .item-icon[data-reagent="reactive"] {
     background-color: #FF5722; /* Orange for reactive */
 }
+
+/* Shop Generator Styles */
+.shop-generator-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .shop-generator-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.shop-generator-form {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shop-generator-result {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shop-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.shop-header h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.shop-inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.shop-inventory-table th {
+    background-color: #f5f5f5;
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+.shop-inventory-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.shop-inventory-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Rarity colors for shop items */
+.rarity-trivial {
+    color: #757575;
+}
+
+.rarity-common {
+    color: #212121;
+}
+
+.rarity-uncommon {
+    color: #2E7D32;
+}
+
+.rarity-rare {
+    color: #1565C0;
+}
+
+.rarity-very-rare {
+    color: #6A1B9A;
+}
+
+.rarity-legendary {
+    color: #FF6F00;
+}
+
+.no-items-message {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}

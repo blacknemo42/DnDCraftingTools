@@ -149,7 +149,7 @@ const ShopTools = {
                 this.renderPriceLookupTool(contentContainer);
                 break;
             case 'shop-generator':
-                contentContainer.innerHTML = '<p>Shop Generator coming soon...</p>';
+                this.renderShopGeneratorTool(contentContainer);
                 break;
             case 'haggling-calculator':
                 contentContainer.innerHTML = '<p>Haggling Calculator coming soon...</p>';
@@ -366,6 +366,187 @@ const ShopTools = {
         searchInput.addEventListener('input', filterItems);
         categoryFilter.addEventListener('change', filterItems);
         rarityFilter.addEventListener('change', filterItems);
+    },
+    
+    // Render the Shop Generator tool
+    renderShopGeneratorTool: function(container) {
+        container.innerHTML = `
+            <div class="shop-generator-container">
+                <div class="shop-generator-form">
+                    <h2>Shop Generator</h2>
+                    <p class="tool-description">Generate a shop inventory based on shop type, size, and settlement.</p>
+                    
+                    <div class="form-group">
+                        <label for="settlement-size">Settlement Size:</label>
+                        <select id="settlement-size" class="loot-select">
+                            <option value="village">Village</option>
+                            <option value="town" selected>Town</option>
+                            <option value="city">City</option>
+                            <option value="metropolis">Metropolis</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="shop-type">Shop Type:</label>
+                        <select id="shop-type" class="loot-select">
+                            <!-- Shop types will be populated based on settlement size -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="shop-size">Shop Size:</label>
+                        <select id="shop-size" class="loot-select">
+                            <option value="small">Small Shop</option>
+                            <option value="medium" selected>Medium Shop</option>
+                            <option value="large">Large Shop</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button id="generate-shop" class="primary-button">Generate Shop</button>
+                    </div>
+                </div>
+                
+                <div class="shop-generator-result" style="display: none;">
+                    <div class="shop-header">
+                        <h3 id="shop-name">Shop Name</h3>
+                        <p id="shop-description">Shop description will appear here.</p>
+                    </div>
+                    
+                    <div id="shop-inventory-container">
+                        <!-- Shop inventory will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        this.setupShopGeneratorEvents(container);
+    },
+    
+    // Setup event listeners for the Shop Generator tool
+    setupShopGeneratorEvents: function(container) {
+        const settlementSelect = container.querySelector('#settlement-size');
+        const shopTypeSelect = container.querySelector('#shop-type');
+        const shopSizeSelect = container.querySelector('#shop-size');
+        const generateButton = container.querySelector('#generate-shop');
+        
+        // Populate shop types based on settlement size
+        this.updateShopTypes(settlementSelect.value, shopTypeSelect);
+        
+        // Update shop types when settlement size changes
+        settlementSelect.addEventListener('change', () => {
+            this.updateShopTypes(settlementSelect.value, shopTypeSelect);
+        });
+        
+        // Generate shop inventory when button is clicked
+        generateButton.addEventListener('click', () => {
+            this.generateShop(container);
+        });
+    },
+    
+    // Update shop types based on settlement size
+    updateShopTypes: function(settlementSize, shopTypeSelect) {
+        // Clear existing options
+        shopTypeSelect.innerHTML = '';
+        
+        // Get available shops for this settlement size
+        const settlement = ShopData.settlementSizes.find(s => s.id === settlementSize);
+        if (!settlement) return;
+        
+        // Add options for each available shop type
+        settlement.availableShops.forEach(shopId => {
+            const shopType = ShopData.shopTypes.find(t => t.id === shopId);
+            if (shopType) {
+                const option = document.createElement('option');
+                option.value = shopType.id;
+                option.textContent = shopType.name;
+                shopTypeSelect.appendChild(option);
+            }
+        });
+    },
+    
+    // Generate shop inventory
+    generateShop: function(container) {
+        const settlementSize = container.querySelector('#settlement-size').value;
+        const shopType = container.querySelector('#shop-type').value;
+        const shopSize = container.querySelector('#shop-size').value;
+        
+        // Get shop type and size objects
+        const shopTypeObj = ShopData.shopTypes.find(t => t.id === shopType);
+        const shopSizeObj = ShopData.shopSizes.find(s => s.id === shopSize);
+        
+        if (!shopTypeObj || !shopSizeObj) return;
+        
+        // Generate inventory
+        const inventory = ShopData.generateInventory(shopType, shopSize, settlementSize);
+        
+        // Update shop header
+        const shopName = container.querySelector('#shop-name');
+        const shopDescription = container.querySelector('#shop-description');
+        
+        shopName.textContent = `${shopSizeObj.name} ${shopTypeObj.name}`;
+        shopDescription.textContent = shopTypeObj.description;
+        
+        // Display inventory
+        this.displayShopInventory(container, inventory);
+        
+        // Show result section
+        container.querySelector('.shop-generator-result').style.display = 'block';
+    },
+    
+    // Display shop inventory
+    displayShopInventory: function(container, inventory) {
+        const inventoryContainer = container.querySelector('#shop-inventory-container');
+        
+        if (inventory.length === 0) {
+            inventoryContainer.innerHTML = '<p class="no-items-message">No items available in this shop.</p>';
+            return;
+        }
+        
+        // Group items by category
+        const categorizedItems = {};
+        inventory.forEach(item => {
+            if (!categorizedItems[item.category]) {
+                categorizedItems[item.category] = [];
+            }
+            categorizedItems[item.category].push(item);
+        });
+        
+        // Generate HTML for inventory
+        let inventoryHTML = '';
+        
+        Object.keys(categorizedItems).forEach(category => {
+            inventoryHTML += `<h4>${category}</h4>`;
+            inventoryHTML += '<table class="shop-inventory-table">';
+            inventoryHTML += `
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Rarity</th>
+                        <th>Used For</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+            
+            categorizedItems[category].forEach(item => {
+                inventoryHTML += `
+                    <tr class="rarity-${item.rarity.toLowerCase().replace(' ', '-')}">
+                        <td>${item.name}</td>
+                        <td>${item.rarity}</td>
+                        <td>${item.usedFor}</td>
+                        <td>${item.quantity}</td>
+                        <td>${item.adjustedPrice}</td>
+                    </tr>
+                `;
+            });
+            
+            inventoryHTML += '</tbody></table>';
+        });
+        
+        inventoryContainer.innerHTML = inventoryHTML;
     }
 };
 
