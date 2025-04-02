@@ -4,7 +4,7 @@
 Cooking in D&D is the art of preparing food that can provide temporary benefits to characters. It uses cook's utensils for crafting and Wisdom or Intelligence (your choice) for crafting rolls.
 
 ## Quick Reference
-1. Select a recipe from the "Cooking Crafting Table"
+1. Select a recipe from the [Cooking Table](javascript:navigateToCraftingTable('cookingtable'))
 2. Acquire the ingredients listed for that recipe
 3. Use cook's utensils to prepare the meal
 4. Make a cooking roll: 1d20 + WIS/INT modifier + proficiency with cook's utensils

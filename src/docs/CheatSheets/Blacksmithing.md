@@ -1,13 +1,13 @@
 # Blacksmithing Cheatsheet
 
 ## Overview
-Blacksmithing is the art of forging metal into weapons, armor, and tools. It uses smith's tools for crafting and Strength or Intelligence (your choice) for crafting rolls.
+Blacksmithing is the art of forging metal into weapons, armor, and tools. It uses smith's tools for crafting and Strength for crafting rolls.
 
 ## Quick Reference
-1. Select an item from the "Blacksmithing Crafting Table"
+1. Select an item from the [Forge Table](javascript:navigateToCraftingTable('forgetable'))
 2. Acquire the materials listed for that item
 3. Use smith's tools to craft the item
-4. For every 2 hours, make a crafting roll: 1d20 + STR/INT modifier + proficiency with smith's tools
+4. For every 2 hours, make a crafting roll: 1d20 + STR modifier + proficiency with smith's tools
 5. On success, mark 2 hours of progress. Once completed time equals crafting time, the item is complete
 6. On failure, no progress is made. Three consecutive failures results in loss of all materials
 

@@ -50,48 +50,20 @@ function initNavigation() {
     }
     
     /**
-     * Initialize a specific module
-     * @param {string} moduleId - The module ID to initialize
+     * Navigate to a specific crafting table
+     * @param {string} tableId - The ID of the crafting table to load
      */
-    function initializeModule(moduleId) {
-        switch(moduleId) {
-            case 'cheatsheets':
-                // Initialize CheatSheets module
-                if (typeof CheatSheets !== 'undefined') {
-                    CheatSheets.initialize();
-                } else {
-                    console.error('Error loading CheatSheets module');
-                }
-                break;
-                
-            case 'collecting':
-                // Initialize Collecting module
-                if (typeof Collecting !== 'undefined') {
-                    Collecting.initialize();
-                } else {
-                    console.error('Error loading Collecting module');
-                }
-                break;
-                
-            case 'shoptools':
-                // Initialize ShopTools module
-                if (typeof ShopTools !== 'undefined') {
-                    ShopTools.initialize();
-                } else {
-                    console.error('Error loading ShopTools module');
-                }
-                break;
-                
-            case 'craftingtables':
-                // Initialize CraftingTables module
-                if (typeof CraftingTables !== 'undefined') {
-                    CraftingTables.initialize();
-                } else {
-                    console.error('Error loading CraftingTables module');
-                }
-                break;
+    window.navigateToCraftingTable = function(tableId) {
+        // First navigate to the crafting tables section
+        navigateTo('craftingtables');
+        
+        // Then load the specific table
+        if (typeof CraftingTables !== 'undefined') {
+            setTimeout(() => {
+                CraftingTables.loadCraftingTable(tableId);
+            }, 100); // Small delay to ensure the section is loaded
         }
-    }
+    };
     
     // Add click event listeners to nav links
     navLinks.forEach(link => {
@@ -120,6 +92,71 @@ function initNavigation() {
     const homeSection = document.getElementById('home-content');
     if (homeSection) {
         homeSection.classList.add('active');
+    }
+    
+    // Handle hash navigation
+    if (window.location.hash) {
+        const hash = window.location.hash.substring(1);
+        if (hash.includes('/')) {
+            const [section, item] = hash.split('/');
+            if (section === 'craftingtables' && item) {
+                navigateTo('craftingtables');
+                setTimeout(() => {
+                    if (typeof CraftingTables !== 'undefined') {
+                        CraftingTables.loadCraftingTable(item);
+                    }
+                }, 100);
+            }
+        } else {
+            const targetSection = document.getElementById(`${hash}-content`);
+            if (targetSection) {
+                navigateTo(hash);
+            }
+        }
+    }
+}
+
+/**
+ * Initialize a specific module
+ * @param {string} moduleId - The module ID to initialize
+ */
+function initializeModule(moduleId) {
+    switch(moduleId) {
+        case 'cheatsheets':
+            // Initialize CheatSheets module
+            if (typeof CheatSheets !== 'undefined') {
+                CheatSheets.initialize();
+            } else {
+                console.error('Error loading CheatSheets module');
+            }
+            break;
+            
+        case 'collecting':
+            // Initialize Collecting module
+            if (typeof Collecting !== 'undefined') {
+                Collecting.initialize();
+            } else {
+                console.error('Error loading Collecting module');
+            }
+            break;
+            
+        case 'shoptools':
+            // Initialize ShopTools module
+            if (typeof ShopTools !== 'undefined') {
+                ShopTools.initialize();
+            } else {
+                console.error('Error loading ShopTools module');
+            }
+            break;
+            
+        case 'craftingtables':
+            // Initialize CraftingTables module
+            if (typeof CraftingTables !== 'undefined') {
+                CraftingTables.initialize();
+            } else {
+                console.error('Error loading CraftingTables module');
+            }
+            break;
     }
 }
 

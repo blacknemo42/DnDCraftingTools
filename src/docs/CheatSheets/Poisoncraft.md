@@ -1,20 +1,20 @@
 # Poisoncraft Cheatsheet
 
 ## Overview
-Poisoncraft is a specialized branch of alchemy focused on creating poisons and venoms. It uses poisoner's kit for crafting and Intelligence or Wisdom (your choice) for crafting rolls.
+Poisoncraft is the art of creating poisons, venoms, and toxins. It uses poisoner's kit for crafting and Intelligence for crafting rolls.
 
 ## Quick Reference
-1. Select a poison from the "Poisons Crafting Table"
+1. Select a poison from the [Poisoncraft Table](javascript:navigateToCraftingTable('poisoncrafttable'))
 2. Acquire the materials listed for that poison
 3. Use poisoner's kit to craft the poison
-4. For every 2 hours, make a crafting roll: 1d20 + INT/WIS modifier + proficiency with poisoner's kit
+4. For every 2 hours, make a crafting roll: 1d20 + INT modifier + proficiency with poisoner's kit
 5. On success, mark 2 hours of progress. Once completed time equals crafting time, the poison is complete
 6. On failure, no progress is made. Three consecutive failures results in loss of all materials
 
 ## Take 10 Rule
 When not under pressure or distraction, a poisoncrafter may choose to "Take 10" on a crafting check:
 - Instead of rolling a d20, automatically use a 10 for the roll
-- Total: 10 + INT/WIS modifier + proficiency with poisoner's kit
+- Total: 10 + INT modifier + proficiency with poisoner's kit
 - This ensures steady progress but prevents exceptional results
 - Not recommended for high-DC poisons where a higher roll is needed to succeed
 
@@ -36,7 +36,7 @@ When not under pressure or distraction, a poisoncrafter may choose to "Take 10" 
 
 ## Poison Saving Throws
 For poisons that require saving throws:
-- DC = 8 + proficiency with poisoner's kit + INT/WIS modifier (your choice)
+- DC = 8 + proficiency with poisoner's kit + INT modifier
 - DC is calculated at creation and doesn't change once the poison is created
 
 ## Applying Poisons

@@ -4,7 +4,7 @@
 Alchemy is the art of creating potions, oils, and other consumable magical items using alchemist's supplies. It uses Intelligence or Wisdom (your choice) for crafting rolls.
 
 ## Quick Reference
-1. Select a potion from the "Potions Crafting Table"
+1. Select a potion from the [Alchemy Table](javascript:navigateToCraftingTable('alchemytable'))
 2. Acquire the materials listed for that potion
 3. Use alchemist's supplies to craft the potion
 4. For every 2 hours, make a crafting roll: 1d20 + INT/WIS modifier + proficiency with alchemist's supplies

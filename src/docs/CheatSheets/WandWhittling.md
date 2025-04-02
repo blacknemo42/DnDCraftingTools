@@ -4,7 +4,7 @@
 Wand Whittling is the art of creating magical wands and staves that can store and cast spells. It uses woodcarver's tools for crafting and Intelligence or Wisdom (your choice) for crafting rolls.
 
 ## Quick Reference
-1. Select a wand from the "Wand Crafting Table"
+1. Select a wand from the [Wand Table](javascript:navigateToCraftingTable('wandtable'))
 2. Acquire the materials listed for that wand
 3. Use woodcarver's tools to craft the wand
 4. For every 2 hours, make a crafting roll: 1d20 + INT/WIS modifier + proficiency with woodcarver's tools

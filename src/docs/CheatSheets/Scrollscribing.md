@@ -4,7 +4,7 @@
 Scrollscribing is the art of creating magical scrolls that contain spells. It uses calligrapher's supplies for crafting and Intelligence for crafting rolls.
 
 ## Quick Reference
-1. Select a spell level for the scroll you wish to create
+1. Select a spell level for the scroll you wish to create from the [Scroll Table](javascript:navigateToCraftingTable('scrolltable'))
 2. Acquire the materials listed for that scroll level
 3. Use calligrapher's supplies to craft the scroll
 4. For every 2 hours, make a crafting roll: 1d20 + INT modifier + proficiency with calligrapher's supplies

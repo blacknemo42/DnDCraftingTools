@@ -4,7 +4,7 @@
 Leatherworking is the art of crafting items from animal hides and skins. It uses leatherworker's tools for crafting and Dexterity or Intelligence (your choice) for crafting rolls.
 
 ## Quick Reference
-1. Select an item from the "Leatherworking Crafting Table"
+1. Select an item from the [Leatherwork Table](javascript:navigateToCraftingTable('leatherworktable'))
 2. Acquire the materials listed for that item
 3. Use leatherworker's tools to craft the item
 4. For every 2 hours, make a crafting roll: 1d20 + DEX/INT modifier + proficiency with leatherworker's tools

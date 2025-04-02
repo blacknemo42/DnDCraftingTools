@@ -4,7 +4,7 @@
 Woodcarving is the art of shaping wood into weapons, tools, and decorative items. It uses woodcarver's tools for crafting and Dexterity or Strength (your choice) for crafting rolls.
 
 ## Quick Reference
-1. Select an item from the "Woodcarving Crafting Table"
+1. Select an item from the [Woodcarving Table](javascript:navigateToCraftingTable('woodcarvingtable'))
 2. Acquire the materials listed for that item
 3. Use woodcarver's tools to craft the item
 4. For every 2 hours, make a crafting roll: 1d20 + DEX/STR modifier + proficiency with woodcarver's tools

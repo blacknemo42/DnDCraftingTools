@@ -4,7 +4,7 @@
 Tinkering is the art of creating small mechanical devices, gadgets, and contraptions. It uses tinker's tools for crafting and Intelligence for crafting rolls.
 
 ## Quick Reference
-1. Select a gadget from the "Tinkering Crafting Table"
+1. Select a gadget from the [Tinkering Table](javascript:navigateToCraftingTable('tinkeringtable'))
 2. Acquire the materials listed for that gadget
 3. Use tinker's tools to craft the gadget
 4. For every 2 hours, make a crafting roll: 1d20 + INT modifier + proficiency with tinker's tools

@@ -4,7 +4,7 @@
 Engineering is the art of designing and constructing complex mechanical devices, traps, and vehicles. It uses tinker's tools or smith's tools for crafting and Intelligence for crafting rolls.
 
 ## Quick Reference
-1. Select an item from the "Engineering Crafting Table"
+1. Select an item from the [Engineering Table](javascript:navigateToCraftingTable('engineeringtable'))
 2. Acquire the materials listed for that item
 3. Use tinker's tools (for small devices) or smith's tools (for large constructions) to craft the item
 4. For every 2 hours, make a crafting roll: 1d20 + INT modifier + proficiency with the appropriate tools

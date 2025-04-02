@@ -4,7 +4,7 @@
 Runecarving is the art of inscribing magical runes onto objects to imbue them with power. It uses mason's tools or jeweler's tools for crafting and Intelligence for crafting rolls.
 
 ## Quick Reference
-1. Select a rune from the "Runecarving Crafting Table"
+1. Select a rune from the [Runecarving Table](javascript:navigateToCraftingTable('runecarvingtable'))
 2. Acquire the materials listed for that rune
 3. Use mason's tools (for stone/metal) or jeweler's tools (for gems) to carve the rune
 4. For every 2 hours, make a crafting roll: 1d20 + INT modifier + proficiency with the appropriate tools
